@@ -15,7 +15,7 @@ namespace OrcamentoMaker3000.ViewModels.Windows
             new NavigationViewItem()
             {
                 Content = "Orçamento",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.Play24 },
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Document24},
                 TargetPageType = typeof(Views.Pages.Orcamento)
             }
 
