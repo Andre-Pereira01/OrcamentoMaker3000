@@ -1,0 +1,262 @@
+﻿<Page x:Class="OrcamentoMaker3000.Views.Pages.Definicoes"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:OrcamentoMaker3000.Views.Pages" xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="800"
+      Background="White"
+      Foreground="Black"
+      Title="Definicoes">
+
+    <TabControl>
+        <TabItem Header="Definições Base">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <!--Auto e * para ser scrollable-->
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Stretch" Margin="15,0,0,10">
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Width="40" Margin="0 20 0 0"  HorizontalAlignment="Stretch">
+                        <ui:Button Click="Save_Definitions">
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="Save24"/>
+                            </StackPanel>
+                        </ui:Button>
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="LightBlue"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                </StackPanel>
+
+                <Grid Grid.Row="1" Margin="35,10,0,0" x:Name="SettingsPropertiesGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="60*"/>
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="30*"/>
+                        <ColumnDefinition Width="50*"/>
+
+
+                    </Grid.ColumnDefinitions>
+
+                    <!--<TextBlock Grid.Row="0" Grid.Column="0" Text="Preço do Quilometro (cents)"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,10,0"/>-->
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="€/km (cent.)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+                    <TextBox x:Name="PrecokmText" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Width="Auto"  Margin="0,5,5,0" VerticalAlignment="Center">
+                    </TextBox>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Poupança Grupo (%)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+                    <TextBox x:Name="GrupoText" Grid.Row="1" Grid.Column="1" Width="Auto"   HorizontalAlignment="Stretch" Margin="0,10,10,0" VerticalAlignment="Center"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Manager(%)" VerticalAlignment="Center"  HorizontalAlignment="Right" Margin="0,10,10,0"/>
+                    <TextBox Name="ManagerBox" Grid.Row="2" Grid.Column="1" Width="Auto"   HorizontalAlignment="Stretch" Margin="0,10,10,0" VerticalAlignment="Center">
+                    </TextBox>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Alimentação(€)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+                    <TextBox x:Name="AlimentaçãoBox" Grid.Row="3" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Salário Extra">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <!--Auto e * para ser scrollable-->
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Stretch" Margin="15,0,0,10">
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Width="40" Margin="0 20 0 0"  HorizontalAlignment="Stretch">
+                        <ui:Button Click="Save_Extra">
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="Save24"/>
+                            </StackPanel>
+                        </ui:Button>
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="LightBlue"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                </StackPanel>
+                <Grid Grid.Row="1" Margin="35,10,0,0" x:Name="SettingsPropertiesGrid2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="15*"/>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="35*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Intervalos de Distância -->
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Menor que" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="DistanceLimit1TextBox" Grid.Row="0" Grid.Column="1" Width="Auto" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="km, recebe" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="Salary1TextBox" Grid.Row="0" Grid.Column="3" Width="Auto" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="0" Grid.Column="4" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
+
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Menor que" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="DistanceLimit2TextBox" Grid.Row="1" Grid.Column="1" Width="Auto" Margin="0,10,10,0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="km, recebe" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="Salary2TextBox" Grid.Row="1" Grid.Column="3" Width="Auto" Margin="0,10,10,0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="4" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Menor que" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="DistanceLimit3TextBox" Grid.Row="2" Grid.Column="1" Width="Auto" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="km, recebe" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="Salary3TextBox" Grid.Row="2" Grid.Column="3" Width="Auto" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="2" Grid.Column="4" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Maior que" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="DistanceLimit4TextBox" Grid.Row="3" Grid.Column="1" Width="Auto" Margin="0,10,10,0"/>
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="km, recebe" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="Salary4TextBox" Grid.Row="3" Grid.Column="3" Width="Auto" Margin="0,10,10,0"/>
+                    <TextBlock Grid.Row="3" Grid.Column="4" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                </Grid>
+
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Valores por Duração">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <!--Auto e * para ser scrollable-->
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Stretch" Margin="15,0,0,10">
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Width="40" Margin="0 20 0 0"  HorizontalAlignment="Stretch">
+                        <ui:Button Click="Save_ValoresBase">
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon Symbol="Save24"/>
+                            </StackPanel>
+                        </ui:Button>
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="LightBlue"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                </StackPanel>
+
+                <Grid Grid.Row="1" Margin="35,10,0,0" x:Name="SettingsPropertiesGrid3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="30*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+   
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="15 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="ValueFor15MinTextBox" Grid.Row="0" Grid.Column="1" Margin="0,10,10,0" />
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="30 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="ValueFor30MinTextBox" Grid.Row="1" Grid.Column="1" Margin="0,10,10,0" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="45 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="ValueFor45MinTextBox" Grid.Row="2" Grid.Column="1" Margin="0,10,10,0" />
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="60 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="ValueFor60MinTextBox" Grid.Row="3" Grid.Column="1" Margin="0,10,10,0" />
+
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="90 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="ValueFor90MinTextBox" Grid.Row="4" Grid.Column="1" Margin="0,10,10,0" />
+                </Grid>
+            </Grid>
+        </TabItem>
+
+
+        <TabControl.Resources>
+            <Style x:Key="TabItemHeaderTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TabItem}, Path=IsSelected}" Value="True">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TabItem}, Path=IsSelected}" Value="False">
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="FontWeight" Value="Normal"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- Estilo para o TabItem -->
+            <Style TargetType="TabItem">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TabItem">
+                            <Grid>
+                                <Border Name="Border" Background="Transparent" BorderBrush="Black" BorderThickness="1" CornerRadius="7,7,0,0" Padding="10,5">
+                                    <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" RecognizesAccessKey="True">
+                                        <ContentPresenter.ContentTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}" Style="{StaticResource TabItemHeaderTextBlockStyle}" />
+                                            </DataTemplate>
+                                        </ContentPresenter.ContentTemplate>
+                                    </ContentPresenter>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="#013FA4" />
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="Black" />
+                                    <Setter Property="FontSize" Value="16"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="False">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent" />
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="Black" />
+                                    <Setter Property="FontSize" Value="16"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </TabControl.Resources>
+    </TabControl>
+</Page>
