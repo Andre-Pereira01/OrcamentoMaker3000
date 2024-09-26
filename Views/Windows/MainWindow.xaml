@@ -64,13 +64,14 @@
         </ui:NavigationView>
 
         <ContentPresenter x:Name="RootContentDialog" Grid.Row="0" />
-
         <Image Source="pack://application:,,,/Assets/wpfui-icon-1024.png"
-               Width="169"
-               Height="54"
-               Grid.Row="0"
-               HorizontalAlignment="Right"
-               VerticalAlignment="Top"
-               Margin="0,65,30,0" />
+           Width="150"
+           Height="150"
+           Grid.Row="0"
+           HorizontalAlignment="Right"
+           VerticalAlignment="Top"
+           Margin="0,25,65,30"
+           RenderOptions.BitmapScalingMode="HighQuality" />
+
     </Grid>
 </ui:FluentWindow>

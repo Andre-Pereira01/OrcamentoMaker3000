@@ -56,7 +56,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!--<TextBlock Grid.Row="0" Grid.Column="0" Text="Preço do Quilometro (cents)"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,10,0"/>-->
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="€/km (cent.)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="€/km" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
                     <TextBox x:Name="PrecokmText" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Width="Auto"  Margin="0,5,5,0" VerticalAlignment="Center">
                     </TextBox>
 
@@ -215,7 +215,7 @@
                 <Setter Property="Foreground" Value="Black"/>
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TabItem}, Path=IsSelected}" Value="True">
-                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Foreground" Value="Black"/>
                         <Setter Property="FontWeight" Value="Bold"/>
                     </DataTrigger>
                     <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TabItem}, Path=IsSelected}" Value="False">
@@ -243,7 +243,7 @@
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsSelected" Value="True">
-                                    <Setter TargetName="Border" Property="Background" Value="#013FA4" />
+                                    <Setter TargetName="Border" Property="Background" Value="#FBB03B" />
                                     <Setter TargetName="Border" Property="BorderBrush" Value="Black" />
                                     <Setter Property="FontSize" Value="16"/>
                                 </Trigger>
