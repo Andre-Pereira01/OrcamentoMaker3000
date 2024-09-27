@@ -8,7 +8,6 @@ using System.Windows.Threading;
 using OrcamentoMaker3000.Services;
 using OrcamentoMaker3000.ViewModels.Pages;
 using OrcamentoMaker3000.ViewModels.Windows;
-using OrcamentoMaker3000.Views.Pages;
 using OrcamentoMaker3000.Views.Windows;
 using Wpf.Ui;
 

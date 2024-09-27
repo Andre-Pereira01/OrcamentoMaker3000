@@ -32,8 +32,8 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="30*"/>
                 <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="30*"/>
 
             </Grid.ColumnDefinitions>
 
@@ -54,12 +54,17 @@
             <TextBlock Grid.Row="4" Grid.Column="0" Text="Data" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
             <DatePicker x:Name="DatePicker" Grid.Row="4" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
 
-
             <TextBlock Grid.Row="5" Grid.Column="0" Text="Horário" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
             <TextBox x:Name="HorarioBox" Grid.Row="5" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
 
-            <TextBlock Grid.Row="6" Grid.Column="0" Text="Duração (min)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
-            <ComboBox x:Name="DuraçãoCombo" Grid.Row="6" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+            <TextBlock Text="Selecione as Durações:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0" />
+            <ComboBox x:Name="DurationComboBox" Grid.Row="6" Grid.Column="1" Width="Auto" Margin="0,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <CheckBox x:Name="Duration15CheckBox" Content="15 Minutos" />
+                <CheckBox x:Name="Duration30CheckBox" Content="30 Minutos" />
+                <CheckBox x:Name="Duration45CheckBox" Content="45 Minutos" />
+                <CheckBox x:Name="Duration60CheckBox" Content="60 Minutos" />
+                <CheckBox x:Name="Duration90CheckBox" Content="90 Minutos" />
+            </ComboBox>
 
             <TextBlock Grid.Row="7" Grid.Column="0" Text="Local" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
             <TextBox x:Name="LocalTextBox" Grid.Row="7" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
