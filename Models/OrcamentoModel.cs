@@ -37,6 +37,7 @@ namespace OrcamentoMaker3000.Models
         private double _extraExpenses;
         private string _savePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Monção Brass\\Orçamentos Automatizados";
         private Dictionary<int, double> _extraSalary;
+        public List<int> _selectedDurations = new List<int>();
 
 
         public int NumberOrc
@@ -246,6 +247,16 @@ namespace OrcamentoMaker3000.Models
             {
                 _savePath = value;
                 OnPropertyChanged(nameof(SavePath));
+            }
+        }
+
+        public List<int> SelectedDurations
+        {
+            get => _selectedDurations;
+            set
+            {
+                _selectedDurations = value;
+                OnPropertyChanged(nameof(SelectedDurations));
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

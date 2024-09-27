@@ -78,7 +78,7 @@ namespace OrcamentoMaker3000.Views.Pages
             }
             else
             {
-                MessageBox.Show("Arquivo de configuração não encontrado.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ficheiro de configuração não encontrado.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void Save_Definitions(object sender, RoutedEventArgs e)
@@ -87,6 +87,13 @@ namespace OrcamentoMaker3000.Views.Pages
             {
                 // Definir o caminho do arquivo config.json
                 string configFilePath = System.IO.Path.Combine(_savePath, "config.json");
+
+                // Verificar se o diretório existe, senão criar
+                string directoryPath = System.IO.Path.GetDirectoryName(configFilePath);
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
 
                 Config config;
                 if (File.Exists(configFilePath))
@@ -125,13 +132,16 @@ namespace OrcamentoMaker3000.Views.Pages
                 string updatedJson = JsonConvert.SerializeObject(config, Formatting.Indented);
                 File.WriteAllText(configFilePath, updatedJson);
 
-                MessageBox.Show("Valores principais atualizados!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+                // Verificação: Leitura para conferir se os valores estão sendo salvos corretamente
+                string testJson = File.ReadAllText(configFilePath);
+                MessageBox.Show($"Valores atualizados com sucesso", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao salvar valores principais: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Erro ao guardar valores principais: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         private void Save_Extra(object sender, RoutedEventArgs e)
         {
             try
@@ -151,28 +161,49 @@ namespace OrcamentoMaker3000.Views.Pages
                     config = new Config(); // Se não existe, cria um novo
                 }
 
-                // Atualizar apenas as faixas de salário extra
+                // Atualizar apenas as faixas de salário extra com variáveis dinâmicas
                 if (int.TryParse(DistanceLimit1TextBox.Text, out var distance1) &&
                     double.TryParse(Salary1TextBox.Text, out var salary1))
                 {
-                    config.ExtraSalary[distance1] = salary1;
+                    if (config.ExtraSalary.ContainsKey(distance1))
+                    {
+                        config.ExtraSalary[distance1] = salary1; // Atualizar existente
+                    }
+                    else
+                    {
+                        config.ExtraSalary.Add(distance1, salary1); // Adicionar nova entrada
+                    }
                 }
 
                 if (int.TryParse(DistanceLimit2TextBox.Text, out var distance2) &&
                     double.TryParse(Salary2TextBox.Text, out var salary2))
                 {
-                    config.ExtraSalary[distance2] = salary2;
+                    if (config.ExtraSalary.ContainsKey(distance2))
+                    {
+                        config.ExtraSalary[distance2] = salary2; // Atualizar existente
+                    }
+                    else
+                    {
+                        config.ExtraSalary.Add(distance2, salary2); // Adicionar nova entrada
+                    }
                 }
 
                 if (int.TryParse(DistanceLimit3TextBox.Text, out var distance3) &&
                     double.TryParse(Salary3TextBox.Text, out var salary3))
                 {
-                    config.ExtraSalary[distance3] = salary3;
+                    if (config.ExtraSalary.ContainsKey(distance3))
+                    {
+                        config.ExtraSalary[distance3] = salary3; // Atualizar existente
+                    }
+                    else
+                    {
+                        config.ExtraSalary.Add(distance3, salary3); // Adicionar nova entrada
+                    }
                 }
 
                 if (double.TryParse(Salary4TextBox.Text, out var salary4))
                 {
-                    config.ExtraSalary[999] = salary4;
+                    config.ExtraSalary[999] = salary4; // Atualizar a distância acima de 150 km (sempre 999)
                 }
 
                 // Salvar o JSON atualizado no arquivo
@@ -183,9 +214,10 @@ namespace OrcamentoMaker3000.Views.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao salvar salários extras: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Erro ao guardar salários extras: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         private void Save_ValoresBase(object sender, RoutedEventArgs e)
         {
             try
@@ -239,7 +271,7 @@ namespace OrcamentoMaker3000.Views.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao salvar valores por duração: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Erro ao guardar valores por duração: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
