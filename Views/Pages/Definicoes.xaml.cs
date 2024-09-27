@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace OrcamentoMaker3000.Views.Pages
 {
@@ -21,163 +23,226 @@ namespace OrcamentoMaker3000.Views.Pages
     /// </summary>
     public partial class Definicoes : Page
     {
+        string _savePath = OrcamentoModel.Instance.SavePath;
         public Definicoes()
         {
             InitializeComponent();
-
-            // Definir os valores do dicionário de salários por duração
-            OrcamentoModel.Instance.ValuePerMusician = new System.Collections.Generic.Dictionary<int, double>
-            {
-                { 15, 25.00 },
-                { 30, 40.00 },
-                { 45, 60.00 },
-                { 60, 75.00 },
-                { 90, 90.00 }
-            };
-
-            OrcamentoModel.Instance.ExtraSalary = new System.Collections.Generic.Dictionary<int, double>
-            {
-                { 30, 15.00 },
-                { 100, 20.00 },
-                { 200, 30.00 },
-                { 999, 40.00 }
-            };
-
-            PrecokmText.Text = OrcamentoModel.Instance.KilometerPrice.ToString();
-            GrupoText.Text = (OrcamentoModel.Instance.GroupSavings * 100).ToString(); // Poupança em %
-            ManagerBox.Text = (OrcamentoModel.Instance.ManagerSalary * 100).ToString(); // Salário do Manager em %
-            AlimentaçãoBox.Text = OrcamentoModel.Instance.AlimentationExpenses.ToString();
-
-            // Preencher os valores de distância e salário extra
-            DistanceLimit1TextBox.Text = "30";
-            Salary1TextBox.Text = OrcamentoModel.Instance.ExtraSalary[30].ToString();
-
-            DistanceLimit2TextBox.Text = "100";
-            Salary2TextBox.Text = OrcamentoModel.Instance.ExtraSalary[100].ToString();
-
-            DistanceLimit3TextBox.Text = "200";
-            Salary3TextBox.Text = OrcamentoModel.Instance.ExtraSalary[200].ToString();
-
-            DistanceLimit4TextBox.Text = "999"; // Valor representando acima de 150km
-            Salary4TextBox.Text = OrcamentoModel.Instance.ExtraSalary[999].ToString();
-
-            // Preencher os valores base no TextBox com os valores atuais do modelo
-            ValueFor15MinTextBox.Text = OrcamentoModel.Instance.ValuePerMusician[15].ToString();
-            ValueFor30MinTextBox.Text = OrcamentoModel.Instance.ValuePerMusician[30].ToString();
-            ValueFor45MinTextBox.Text = OrcamentoModel.Instance.ValuePerMusician[45].ToString();
-            ValueFor60MinTextBox.Text = OrcamentoModel.Instance.ValuePerMusician[60].ToString();
-            ValueFor90MinTextBox.Text = OrcamentoModel.Instance.ValuePerMusician[90].ToString();
-
-
+            CarregarConfiguracoes();
         }
 
+        private void CarregarConfiguracoes()
+        {
+            // Definir o caminho do arquivo config.json
+            string configFilePath = System.IO.Path.Combine(_savePath, "config.json");
+
+            if (File.Exists(configFilePath))
+            {
+                // Ler o JSON do arquivo config.json
+                string json = File.ReadAllText(configFilePath);
+
+                // Deserializar o JSON para o objeto Config
+                var config = JsonConvert.DeserializeObject<Config>(json);
+
+                // Inicializar os dicionários caso estejam nulos
+                OrcamentoModel.Instance.ValuePerMusician = config.ValuePerMusician ?? new Dictionary<int, double>();
+                OrcamentoModel.Instance.ExtraSalary = config.ExtraSalary ?? new Dictionary<int, double>();
+                OrcamentoModel.Instance.KilometerPrice = config.KilometerPrice;
+                OrcamentoModel.Instance.GroupSavings = config.GroupSavings;
+                OrcamentoModel.Instance.ManagerSalary = config.ManagerSalary;
+
+                // Atualizar a interface com os valores carregados
+                PrecokmText.Text = OrcamentoModel.Instance.KilometerPrice.ToString();
+                GrupoText.Text = (OrcamentoModel.Instance.GroupSavings * 100).ToString(); // Poupança em %
+                ManagerBox.Text = (OrcamentoModel.Instance.ManagerSalary * 100).ToString(); // Salário do Manager em %
+                AlimentaçãoBox.Text = OrcamentoModel.Instance.AlimentationExpenses.ToString();
+
+                // Atualizar valores por duração
+                ValueFor15MinTextBox.Text = OrcamentoModel.Instance.ValuePerMusician[15].ToString();
+                ValueFor30MinTextBox.Text = OrcamentoModel.Instance.ValuePerMusician[30].ToString();
+                ValueFor45MinTextBox.Text = OrcamentoModel.Instance.ValuePerMusician[45].ToString();
+                ValueFor60MinTextBox.Text = OrcamentoModel.Instance.ValuePerMusician[60].ToString();
+                ValueFor90MinTextBox.Text = OrcamentoModel.Instance.ValuePerMusician[90].ToString();
+
+                // Atualizar valores de salários extras
+                DistanceLimit1TextBox.Text = "30"; // Se você quer tornar essas variáveis dinâmicas, pode carregar do arquivo
+                Salary1TextBox.Text = OrcamentoModel.Instance.ExtraSalary[30].ToString();
+
+                DistanceLimit2TextBox.Text = "100";
+                Salary2TextBox.Text = OrcamentoModel.Instance.ExtraSalary[100].ToString();
+
+                DistanceLimit3TextBox.Text = "200";
+                Salary3TextBox.Text = OrcamentoModel.Instance.ExtraSalary[200].ToString();
+
+                DistanceLimit4TextBox.Text = "999";
+                Salary4TextBox.Text = OrcamentoModel.Instance.ExtraSalary[999].ToString();
+            }
+            else
+            {
+                MessageBox.Show("Arquivo de configuração não encontrado.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
         private void Save_Definitions(object sender, RoutedEventArgs e)
         {
             try
             {
-                // Alterar os valores no modelo
+                // Definir o caminho do arquivo config.json
+                string configFilePath = System.IO.Path.Combine(_savePath, "config.json");
+
+                Config config;
+                if (File.Exists(configFilePath))
+                {
+                    // Carregar o JSON existente
+                    string json = File.ReadAllText(configFilePath);
+                    config = JsonConvert.DeserializeObject<Config>(json);
+                }
+                else
+                {
+                    config = new Config(); // Se não existe, cria um novo
+                }
+
+                // Atualizar apenas os valores de definições principais
                 if (double.TryParse(PrecokmText.Text, out var kilometerPrice))
-                    OrcamentoModel.Instance.KilometerPrice = kilometerPrice;
+                {
+                    config.KilometerPrice = kilometerPrice;
+                }
 
                 if (double.TryParse(GrupoText.Text, out var groupSavings))
-                    OrcamentoModel.Instance.GroupSavings = groupSavings / 100; // Converter para double
+                {
+                    config.GroupSavings = groupSavings / 100; // Converter para porcentagem
+                }
 
                 if (double.TryParse(ManagerBox.Text, out var managerSalary))
-                    OrcamentoModel.Instance.ManagerSalary = managerSalary / 100; // Converter para double
+                {
+                    config.ManagerSalary = managerSalary / 100; // Converter para porcentagem
+                }
 
                 if (double.TryParse(AlimentaçãoBox.Text, out var alimentationExpenses))
-                    OrcamentoModel.Instance.AlimentationExpenses = alimentationExpenses;
-                if (double.TryParse(ExtraBox.Text, out var extraExpenses))
-                    OrcamentoModel.Instance.ExtraExpenses = extraExpenses;
+                {
+                    OrcamentoModel.Instance.AlimentationExpenses = alimentationExpenses; // Salvar no modelo também
+                }
 
-                MessageBox.Show("Valores atualizados!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+                // Salvar o JSON atualizado no arquivo
+                string updatedJson = JsonConvert.SerializeObject(config, Formatting.Indented);
+                File.WriteAllText(configFilePath, updatedJson);
+
+                MessageBox.Show("Valores principais atualizados!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao atualizar valores: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Erro ao salvar valores principais: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void Save_Extra(object sender, RoutedEventArgs e)
         {
             try
             {
+                // Definir o caminho do arquivo config.json
+                string configFilePath = System.IO.Path.Combine(_savePath, "config.json");
 
+                Config config;
+                if (File.Exists(configFilePath))
+                {
+                    // Carregar o JSON existente
+                    string json = File.ReadAllText(configFilePath);
+                    config = JsonConvert.DeserializeObject<Config>(json);
+                }
+                else
+                {
+                    config = new Config(); // Se não existe, cria um novo
+                }
+
+                // Atualizar apenas as faixas de salário extra
                 if (int.TryParse(DistanceLimit1TextBox.Text, out var distance1) &&
                     double.TryParse(Salary1TextBox.Text, out var salary1))
                 {
-                    // Atualiza o dicionário para a primeira faixa
-                    OrcamentoModel.Instance.ExtraSalary[distance1] = salary1;
+                    config.ExtraSalary[distance1] = salary1;
                 }
 
                 if (int.TryParse(DistanceLimit2TextBox.Text, out var distance2) &&
                     double.TryParse(Salary2TextBox.Text, out var salary2))
                 {
-                    // Atualiza o dicionário para a segunda faixa
-                    OrcamentoModel.Instance.ExtraSalary[distance2] = salary2;
+                    config.ExtraSalary[distance2] = salary2;
                 }
 
                 if (int.TryParse(DistanceLimit3TextBox.Text, out var distance3) &&
                     double.TryParse(Salary3TextBox.Text, out var salary3))
                 {
-                    // Atualiza o dicionário para a terceira faixa
-                    OrcamentoModel.Instance.ExtraSalary[distance3] = salary3;
+                    config.ExtraSalary[distance3] = salary3;
                 }
 
-                // Para a faixa de distâncias acima de 150km, definimos como 999 no dicionário
                 if (double.TryParse(Salary4TextBox.Text, out var salary4))
                 {
-                    OrcamentoModel.Instance.ExtraSalary[999] = salary4;
+                    config.ExtraSalary[999] = salary4;
                 }
 
-                MessageBox.Show("Valores atualizados!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+                // Salvar o JSON atualizado no arquivo
+                string updatedJson = JsonConvert.SerializeObject(config, Formatting.Indented);
+                File.WriteAllText(configFilePath, updatedJson);
+
+                MessageBox.Show("Salários extras atualizados!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao atualizar valores: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Erro ao salvar salários extras: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-
         private void Save_ValoresBase(object sender, RoutedEventArgs e)
         {
             try
             {
-                // Verifica e atualiza os valores de cada duração
+                // Definir o caminho do arquivo config.json
+                string configFilePath = System.IO.Path.Combine(_savePath, "config.json");
+
+                Config config;
+                if (File.Exists(configFilePath))
+                {
+                    // Carregar o JSON existente
+                    string json = File.ReadAllText(configFilePath);
+                    config = JsonConvert.DeserializeObject<Config>(json);
+                }
+                else
+                {
+                    config = new Config(); // Se não existe, cria um novo
+                }
+
+                // Atualizar apenas os valores por duração
                 if (double.TryParse(ValueFor15MinTextBox.Text, out var value15))
                 {
-                    OrcamentoModel.Instance.ValuePerMusician[15] = value15;
+                    config.ValuePerMusician[15] = value15;
                 }
 
                 if (double.TryParse(ValueFor30MinTextBox.Text, out var value30))
                 {
-                    OrcamentoModel.Instance.ValuePerMusician[30] = value30;
+                    config.ValuePerMusician[30] = value30;
                 }
 
                 if (double.TryParse(ValueFor45MinTextBox.Text, out var value45))
                 {
-                    OrcamentoModel.Instance.ValuePerMusician[45] = value45;
+                    config.ValuePerMusician[45] = value45;
                 }
 
                 if (double.TryParse(ValueFor60MinTextBox.Text, out var value60))
                 {
-                    OrcamentoModel.Instance.ValuePerMusician[60] = value60;
+                    config.ValuePerMusician[60] = value60;
                 }
 
                 if (double.TryParse(ValueFor90MinTextBox.Text, out var value90))
                 {
-                    OrcamentoModel.Instance.ValuePerMusician[90] = value90;
+                    config.ValuePerMusician[90] = value90;
                 }
 
-                MessageBox.Show("Valores atualizados!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+                // Salvar o JSON atualizado no arquivo
+                string updatedJson = JsonConvert.SerializeObject(config, Formatting.Indented);
+                File.WriteAllText(configFilePath, updatedJson);
+
+                MessageBox.Show("Valores por duração atualizados!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao atualizar valores: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Erro ao salvar valores por duração: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-
     }
 }
+
 

@@ -194,12 +194,18 @@ namespace OrcamentoMaker3000.Views.Pages
                     if (text.Text.Contains("clientName")) text.Text = text.Text.Replace("clientName", OrcamentoModel.Instance.ClientName);
                     if (text.Text.Contains("clientPhone")) text.Text = text.Text.Replace("clientPhone", OrcamentoModel.Instance.ClientPhone);
                     if (text.Text.Contains("clientEmail")) text.Text = text.Text.Replace("clientEmail", OrcamentoModel.Instance.ClientEmail);
-                    if (text.Text.Contains("serviceTypes")) text.Text = text.Text.Replace("serviceTypes", OrcamentoModel.Instance.ServiceType);
+                    if (text.Text.Contains("thisVar")) text.Text = text.Text.Replace("thisVar", OrcamentoModel.Instance.ServiceType);
                     if (text.Text.Contains("date")) text.Text = text.Text.Replace("date", OrcamentoModel.Instance.Date.ToString("dd/MM/yyyy"));
                     if (text.Text.Contains("schedule")) text.Text = text.Text.Replace("schedule", OrcamentoModel.Instance.Schedule);
                     if (text.Text.Contains("location")) text.Text = text.Text.Replace("location", OrcamentoModel.Instance.Location);
-                    if (text.Text.Contains("creationDate")) text.Text = text.Text.Replace("creationDate", OrcamentoModel.Instance.CreationDate.ToString("dd/MM/yyyy"));
-                    if (text.Text.Contains("duration1")) text.Text = text.Text.Replace("duration1", OrcamentoModel.Instance.Duration.ToString());
+                    //if (text.Text.Contains("creationDate")) text.Text = text.Text.Replace("creationDate", OrcamentoModel.Instance.CreationDate.ToString("dd/MM/yyyy"));
+                    if (text.Text.Contains("creationDate"))
+                    {
+                        // Formatar a data como "dd de [Mês] de yyyy"
+                        string formattedDate = OrcamentoModel.Instance.CreationDate.ToString("dd 'de' MMMM 'de' yyyy", new System.Globalization.CultureInfo("pt-PT"));
+                        text.Text = text.Text.Replace("creationDate", formattedDate);
+                    }
+                    if (text.Text.Contains("duration1")) text.Text = text.Text.Replace("duration1", OrcamentoModel.Instance.Duration.ToString() + "min");
                     if (text.Text.Contains("cotation1")) text.Text = text.Text.Replace("cotation1", OrcamentoModel.Instance.Cotation.ToString("C2"));
                 }
 

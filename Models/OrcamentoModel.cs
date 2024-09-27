@@ -35,7 +35,7 @@ namespace OrcamentoMaker3000.Models
         private double _managerSalary = 0.08;
         private double _alimentationExpenses;
         private double _extraExpenses;
-        private string _savePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        private string _savePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\Monção Brass\\Orçamentos Automatizados";
         private Dictionary<int, double> _extraSalary;
 
 
