@@ -31,9 +31,9 @@
                 <RowDefinition Height="9*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="20*"/>
                 <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="40*"/>
 
             </Grid.ColumnDefinitions>
 
@@ -49,7 +49,7 @@
             </TextBox>
 
             <TextBlock Grid.Row="3" Grid.Column="0" Text="Serviço" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
-            <TextBox x:Name="Lock_timeout_ms" Grid.Row="3" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+            <TextBox x:Name="ServicoText" Grid.Row="3" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
             <TextBlock Grid.Row="4" Grid.Column="0" Text="Data" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
             <DatePicker x:Name="DatePicker" Grid.Row="4" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
@@ -57,8 +57,8 @@
 
             <TextBlock Grid.Row="5" Grid.Column="0" Text="Horário" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
             <TextBox x:Name="HorarioBox" Grid.Row="5" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
-            
-            <TextBlock Grid.Row="6" Grid.Column="0" Text="Duração" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="Duração (min)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
             <ComboBox x:Name="DuraçãoCombo" Grid.Row="6" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
             <TextBlock Grid.Row="7" Grid.Column="0" Text="Local" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
@@ -66,7 +66,10 @@
 
             <TextBlock Grid.Row="8" Grid.Column="0" Text="Distância (km)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
             <TextBox x:Name="DistanciaText" Grid.Row="8" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-            <Button Grid.Row="9" HorizontalAlignment="Center" Grid.ColumnSpan="2"  Grid.Column="0" BorderBrush="Black"  Click="GerarOrcamento" Content="Gerar Orçamento" VerticalAlignment="Center" Margin="60,10,10,0"/>
+
+            <TextBlock Grid.Row="9" Grid.Column="0" Text="Localização dos ficheiros" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+            <Button Grid.Row="9" HorizontalAlignment="Center" Grid.Column="1" BorderBrush="Black"  Click="Escolher_Diretorio" Content="Escolher Pasta" VerticalAlignment="Center" Margin="10,10,10,10"/>
+            <Button Grid.Row="9" HorizontalAlignment="Center" Grid.Column="2" BorderBrush="Black"  Click="GerarOrcamento" Content="Gerar Orçamento" VerticalAlignment="Center" Margin="10,10,10,10"/>
         </Grid>
 
 

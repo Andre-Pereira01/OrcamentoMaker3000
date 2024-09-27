@@ -14,7 +14,7 @@ namespace OrcamentoMaker3000.Models
 
         public static OrcamentoModel Instance => _instance ?? (_instance = new OrcamentoModel());
 
-        private int _numberOrc;
+        private int _numberOrc = 1;
         private string _clientName;
         private string _clientPhone;
         private string _clientEmail;
@@ -23,18 +23,20 @@ namespace OrcamentoMaker3000.Models
         private string _schedule;
         private string _location;
         private int _duration;
-        private decimal _cotation;
+        private double _cotation;
         private DateTime _creationDate;
-        private Dictionary<int, decimal> _valuePerMusician;
+        private Dictionary<int, double> _valuePerMusician;
         private int _numberMusicians = 6;
-        private decimal _kilometerPrice = 0.2m;
-        private decimal _distance;
-        private decimal _travelExpenses;
-        private decimal _totalBaseValue;
-        private decimal _groupSavings = 0.10m;
-        private decimal _managerSalary = 0.08m;
-        private decimal _alimentationExpenses;
-        private Dictionary<int, decimal> _extraSalary;
+        private double _kilometerPrice = 0.20;
+        private double _distance;
+        private double _travelExpenses;
+        private double _totalBaseValue;
+        private double _groupSavings = 0.10;
+        private double _managerSalary = 0.08;
+        private double _alimentationExpenses;
+        private double _extraExpenses;
+        private string _savePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        private Dictionary<int, double> _extraSalary;
 
 
         public int NumberOrc
@@ -118,7 +120,7 @@ namespace OrcamentoMaker3000.Models
                 OnPropertyChanged(nameof(Duration));
             }
         }
-        public decimal Cotation
+        public double Cotation
         {
             get => _cotation;
             set
@@ -136,7 +138,7 @@ namespace OrcamentoMaker3000.Models
                 OnPropertyChanged(nameof(CreationDate));
             }
         }
-        public Dictionary<int, decimal> ValuePerMusician
+        public Dictionary<int, double> ValuePerMusician
         {
             get => _valuePerMusician;
             set
@@ -154,7 +156,7 @@ namespace OrcamentoMaker3000.Models
                 OnPropertyChanged(nameof(NumberMusicians));
             }
         }
-        public decimal KilometerPrice
+        public double KilometerPrice
         {
             get => _kilometerPrice;
             set
@@ -163,7 +165,7 @@ namespace OrcamentoMaker3000.Models
                 OnPropertyChanged(nameof(KilometerPrice));
             }
         }
-        public decimal Distance
+        public double Distance
         {
             get => _distance;
             set
@@ -172,7 +174,7 @@ namespace OrcamentoMaker3000.Models
                 OnPropertyChanged(nameof(Distance));
             }
         }
-        public decimal TravelExpenses
+        public double TravelExpenses
         {
             get => _travelExpenses;
             set
@@ -181,7 +183,7 @@ namespace OrcamentoMaker3000.Models
                 OnPropertyChanged(nameof(TravelExpenses));
             }
         }
-        public decimal TotalBaseValue
+        public double TotalBaseValue
         {
             get => _totalBaseValue;
             set
@@ -190,7 +192,7 @@ namespace OrcamentoMaker3000.Models
                 OnPropertyChanged(nameof(TotalBaseValue));
             }
         }
-        public decimal GroupSavings
+        public double GroupSavings
         {
             get => _groupSavings;
             set
@@ -199,7 +201,7 @@ namespace OrcamentoMaker3000.Models
                 OnPropertyChanged(nameof(GroupSavings));
             }
         }
-        public decimal ManagerSalary
+        public double ManagerSalary
         {
             get => _managerSalary;
             set
@@ -208,7 +210,7 @@ namespace OrcamentoMaker3000.Models
                 OnPropertyChanged(nameof(ManagerSalary));
             }
         }
-        public decimal AlimentationExpenses
+        public double AlimentationExpenses
         {
             get => _alimentationExpenses;
             set
@@ -217,7 +219,7 @@ namespace OrcamentoMaker3000.Models
                 OnPropertyChanged(nameof(AlimentationExpenses));
             }
         }
-        public Dictionary<int, decimal> ExtraSalary
+        public Dictionary<int, double> ExtraSalary
         {
             get => _extraSalary;
             set
@@ -227,6 +229,25 @@ namespace OrcamentoMaker3000.Models
             }
         }
 
+        public double ExtraExpenses
+        {
+            get => _extraExpenses;
+            set
+            {
+                _extraExpenses = value;
+                OnPropertyChanged(nameof(ExtraExpenses));
+            }
+        }
+
+        public string SavePath
+        {
+            get => _savePath;
+            set
+            {
+                _savePath = value;
+                OnPropertyChanged(nameof(SavePath));
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {

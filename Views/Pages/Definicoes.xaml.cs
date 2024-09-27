@@ -26,21 +26,21 @@ namespace OrcamentoMaker3000.Views.Pages
             InitializeComponent();
 
             // Definir os valores do dicionário de salários por duração
-            OrcamentoModel.Instance.ValuePerMusician = new System.Collections.Generic.Dictionary<int, decimal>
+            OrcamentoModel.Instance.ValuePerMusician = new System.Collections.Generic.Dictionary<int, double>
             {
-                { 15, 25.00m },
-                { 30, 40.00m },
-                { 45, 60.00m },
-                { 60, 75.00m },
-                { 90, 90.00m }
+                { 15, 25.00 },
+                { 30, 40.00 },
+                { 45, 60.00 },
+                { 60, 75.00 },
+                { 90, 90.00 }
             };
 
-            OrcamentoModel.Instance.ExtraSalary = new System.Collections.Generic.Dictionary<int, decimal>
+            OrcamentoModel.Instance.ExtraSalary = new System.Collections.Generic.Dictionary<int, double>
             {
-                { 30, 15.00m },
-                { 100, 20.00m },
-                { 200, 30.00m },
-                {999, 40.00m }
+                { 30, 15.00 },
+                { 100, 20.00 },
+                { 200, 30.00 },
+                { 999, 40.00 }
             };
 
             PrecokmText.Text = OrcamentoModel.Instance.KilometerPrice.ToString();
@@ -67,6 +67,8 @@ namespace OrcamentoMaker3000.Views.Pages
             ValueFor45MinTextBox.Text = OrcamentoModel.Instance.ValuePerMusician[45].ToString();
             ValueFor60MinTextBox.Text = OrcamentoModel.Instance.ValuePerMusician[60].ToString();
             ValueFor90MinTextBox.Text = OrcamentoModel.Instance.ValuePerMusician[90].ToString();
+
+
         }
 
         private void Save_Definitions(object sender, RoutedEventArgs e)
@@ -74,17 +76,19 @@ namespace OrcamentoMaker3000.Views.Pages
             try
             {
                 // Alterar os valores no modelo
-                if (decimal.TryParse(PrecokmText.Text, out var kilometerPrice))
+                if (double.TryParse(PrecokmText.Text, out var kilometerPrice))
                     OrcamentoModel.Instance.KilometerPrice = kilometerPrice;
 
-                if (decimal.TryParse(GrupoText.Text, out var groupSavings))
-                    OrcamentoModel.Instance.GroupSavings = groupSavings / 100; // Converter para decimal
+                if (double.TryParse(GrupoText.Text, out var groupSavings))
+                    OrcamentoModel.Instance.GroupSavings = groupSavings / 100; // Converter para double
 
-                if (decimal.TryParse(ManagerBox.Text, out var managerSalary))
-                    OrcamentoModel.Instance.ManagerSalary = managerSalary / 100; // Converter para decimal
+                if (double.TryParse(ManagerBox.Text, out var managerSalary))
+                    OrcamentoModel.Instance.ManagerSalary = managerSalary / 100; // Converter para double
 
-                if (decimal.TryParse(AlimentaçãoBox.Text, out var alimentationExpenses))
+                if (double.TryParse(AlimentaçãoBox.Text, out var alimentationExpenses))
                     OrcamentoModel.Instance.AlimentationExpenses = alimentationExpenses;
+                if (double.TryParse(ExtraBox.Text, out var extraExpenses))
+                    OrcamentoModel.Instance.ExtraExpenses = extraExpenses;
 
                 MessageBox.Show("Valores atualizados!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -100,28 +104,28 @@ namespace OrcamentoMaker3000.Views.Pages
             {
 
                 if (int.TryParse(DistanceLimit1TextBox.Text, out var distance1) &&
-                    decimal.TryParse(Salary1TextBox.Text, out var salary1))
+                    double.TryParse(Salary1TextBox.Text, out var salary1))
                 {
                     // Atualiza o dicionário para a primeira faixa
                     OrcamentoModel.Instance.ExtraSalary[distance1] = salary1;
                 }
 
                 if (int.TryParse(DistanceLimit2TextBox.Text, out var distance2) &&
-                    decimal.TryParse(Salary2TextBox.Text, out var salary2))
+                    double.TryParse(Salary2TextBox.Text, out var salary2))
                 {
                     // Atualiza o dicionário para a segunda faixa
                     OrcamentoModel.Instance.ExtraSalary[distance2] = salary2;
                 }
 
                 if (int.TryParse(DistanceLimit3TextBox.Text, out var distance3) &&
-                    decimal.TryParse(Salary3TextBox.Text, out var salary3))
+                    double.TryParse(Salary3TextBox.Text, out var salary3))
                 {
                     // Atualiza o dicionário para a terceira faixa
                     OrcamentoModel.Instance.ExtraSalary[distance3] = salary3;
                 }
 
                 // Para a faixa de distâncias acima de 150km, definimos como 999 no dicionário
-                if (decimal.TryParse(Salary4TextBox.Text, out var salary4))
+                if (double.TryParse(Salary4TextBox.Text, out var salary4))
                 {
                     OrcamentoModel.Instance.ExtraSalary[999] = salary4;
                 }
@@ -140,27 +144,27 @@ namespace OrcamentoMaker3000.Views.Pages
             try
             {
                 // Verifica e atualiza os valores de cada duração
-                if (decimal.TryParse(ValueFor15MinTextBox.Text, out var value15))
+                if (double.TryParse(ValueFor15MinTextBox.Text, out var value15))
                 {
                     OrcamentoModel.Instance.ValuePerMusician[15] = value15;
                 }
 
-                if (decimal.TryParse(ValueFor30MinTextBox.Text, out var value30))
+                if (double.TryParse(ValueFor30MinTextBox.Text, out var value30))
                 {
                     OrcamentoModel.Instance.ValuePerMusician[30] = value30;
                 }
 
-                if (decimal.TryParse(ValueFor45MinTextBox.Text, out var value45))
+                if (double.TryParse(ValueFor45MinTextBox.Text, out var value45))
                 {
                     OrcamentoModel.Instance.ValuePerMusician[45] = value45;
                 }
 
-                if (decimal.TryParse(ValueFor60MinTextBox.Text, out var value60))
+                if (double.TryParse(ValueFor60MinTextBox.Text, out var value60))
                 {
                     OrcamentoModel.Instance.ValuePerMusician[60] = value60;
                 }
 
-                if (decimal.TryParse(ValueFor90MinTextBox.Text, out var value90))
+                if (double.TryParse(ValueFor90MinTextBox.Text, out var value90))
                 {
                     OrcamentoModel.Instance.ValuePerMusician[90] = value90;
                 }
