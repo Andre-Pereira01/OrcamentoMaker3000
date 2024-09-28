@@ -13,9 +13,8 @@
                                      IsDesignTimeCreatable=True}"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Background="#F8F9FC"
+    Foreground="Black"
     ExtendsContentIntoTitleBar="True"
    
     WindowBackdropType="Mica"

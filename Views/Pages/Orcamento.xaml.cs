@@ -8,8 +8,15 @@ using System;
 using System.Windows;
 using Spire.Doc;
 using Spire.Doc.Documents;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using System.Globalization;
+using OpenQA.Selenium.Support;
+using System.Text.RegularExpressions;
 
-
+using DocumentFormat.OpenXml.InkML;
+using System.Diagnostics;
 
 namespace OrcamentoMaker3000.Views.Pages
 {
@@ -21,7 +28,66 @@ namespace OrcamentoMaker3000.Views.Pages
         public Orcamento()
         {
             InitializeComponent();
+
             LoadConfig();
+        }
+        private void calcularDistancia(string x)
+        {
+            string local = x; // Local que você deseja usar para calcular a distância
+
+            IWebDriver driver = new ChromeDriver();
+
+            try
+            {
+                // Navegar até a página do Bing
+                //driver.Navigate().GoToUrl("https://bing.com/");
+                driver.Navigate().GoToUrl("https://www.bing.com/maps/directions");
+
+                // Esperar a página carregar
+                Thread.Sleep(5000);
+
+                // Localizar a caixa de entrada "De" e inserir "Monção"
+                var fromInput = driver.FindElement(By.XPath("//input[@title='De']"));
+                fromInput.SendKeys("Monção");
+
+                // Localizar a caixa de entrada "Para" e inserir o local
+                var toInput = driver.FindElement(By.XPath("//input[@title='Para']"));
+                toInput.SendKeys(local);
+
+                // Localizar e clicar no botão "Ir"
+                var goButton = driver.FindElement(By.XPath("//a[@data-tag='dirBtnGo']"));
+                goButton.Click();
+
+                // Esperar os resultados carregarem
+                Thread.Sleep(5000);
+
+                // Capturar a distância
+                try
+                {
+                    var distanceElement = driver.FindElement(By.ClassName("distanceLine"));
+                    string distanceText = distanceElement.Text;
+
+                    // Armazenar a distância no modelo
+                    System.Diagnostics.Trace.WriteLine($"Distância: {distanceText}");
+                    // Opcional: Converter para double e armazenar no modelo
+                    OrcamentoModel.Instance.Distance = double.Parse(Regex.Match(distanceText, @"\d+").Value, CultureInfo.InvariantCulture);
+                    System.Diagnostics.Trace.WriteLine($"Distância:{OrcamentoModel.Instance.Distance}");
+                }
+                catch (NoSuchElementException)
+                {
+                    MessageBox.Show("Não foi possível encontrar o elemento da distância.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro: {ex.Message}");
+            }
+            finally
+            {
+                // Fechar o navegador
+                driver.Quit();
+            }
+
         }
 
         private void LoadConfig()
@@ -72,10 +138,10 @@ namespace OrcamentoMaker3000.Views.Pages
                 MessageBox.Show("Por favor, selecione a data do evento.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (string.IsNullOrWhiteSpace(DistanciaText.Text))
-            {
-                MessageBox.Show("Por favor, preencha a distância do evento.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            //if (string.IsNullOrWhiteSpace(DistanciaText.Text))
+            //{
+            //    MessageBox.Show("Por favor, preencha a distância do evento.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
 
             if (string.IsNullOrWhiteSpace(HorarioBox.Text))
             {
@@ -90,6 +156,14 @@ namespace OrcamentoMaker3000.Views.Pages
                 ClientEmailTextBox.Text = "N/A";
             }
 
+            // Verifica se o diretório existe
+            if (!Directory.Exists(OrcamentoModel.Instance.SavePath))
+            {
+                // Se não existir, cria o diretório
+                Directory.CreateDirectory(OrcamentoModel.Instance.SavePath);
+            }
+
+
             // Preencher os valores no modelo
             OrcamentoModel.Instance.ClientName = ClientNameTextBox.Text;
             OrcamentoModel.Instance.ClientPhone = ClientPhoneTextBox.Text;
@@ -98,9 +172,9 @@ namespace OrcamentoMaker3000.Views.Pages
             OrcamentoModel.Instance.Date = DatePicker.SelectedDate ?? DateTime.Now;
             OrcamentoModel.Instance.Schedule = HorarioBox.Text;
             OrcamentoModel.Instance.Location = LocalTextBox.Text;
-            //OrcamentoModel.Instance.Duration = int.Parse(DuraçãoCombo.SelectedValue.ToString());
+            calcularDistancia(OrcamentoModel.Instance.Location);
             OrcamentoModel.Instance.CreationDate = DateTime.Now;
-            OrcamentoModel.Instance.Distance = double.Parse(DistanciaText.Text);
+            
 
             OrcamentoModel.Instance.SelectedDurations.Clear();
             // Verificar quais durações foram selecionadas
@@ -109,6 +183,9 @@ namespace OrcamentoMaker3000.Views.Pages
             if (Duration45CheckBox.IsChecked == true) OrcamentoModel.Instance.SelectedDurations.Add(45);
             if (Duration60CheckBox.IsChecked == true) OrcamentoModel.Instance.SelectedDurations.Add(60);
             if (Duration90CheckBox.IsChecked == true) OrcamentoModel.Instance.SelectedDurations.Add(90);
+
+            //OrcamentoModel.Instance.Duration = int.Parse(DuraçãoCombo.SelectedValue.ToString());
+            //OrcamentoModel.Instance.Distance = double.Parse(DistanciaText.Text);
 
             if (!OrcamentoModel.Instance.SelectedDurations.Any())
             {
@@ -119,6 +196,9 @@ namespace OrcamentoMaker3000.Views.Pages
             AtualizarNumberOrc();
             PreencherDocumentoWord();
         }
+
+
+
         private void AtualizarNumberOrc()
         {
             // Inicializar o número do orçamento com 20
@@ -155,7 +235,7 @@ namespace OrcamentoMaker3000.Views.Pages
             OrcamentoModel.Instance.NumberOrc = numberOrc + 1;
         }
 
-        private double CalcularExtraSalary(double distance)
+        private double CalcularExtraSalary(double distance, string outputPath)
         {
             //if (distance < 30)
             //    return 10;
@@ -172,6 +252,7 @@ namespace OrcamentoMaker3000.Views.Pages
                 if (distance <= range)
                 {
                     return OrcamentoModel.Instance.ExtraSalary[range];
+
                 }
             }
 
@@ -236,17 +317,6 @@ namespace OrcamentoMaker3000.Views.Pages
                     }
 
                 }
-                //if (text.Text.Contains("date"))
-                //{
-                //    string formattedDate1 = OrcamentoModel.Instance.Date.ToString("dd 'de' MMMM 'de' yyyy", new System.Globalization.CultureInfo("pt-PT"));
-                //    text.Text = text.Text.Replace("date", formattedDate1);
-                //}
-                //if (text.Text.Contains("creationDate"))
-                //{
-                //    string formattedDate2 = OrcamentoModel.Instance.CreationDate.ToString("dd 'de' MMMM 'de' yyyy", new System.Globalization.CultureInfo("pt-PT"));
-                //    text.Text = text.Text.Replace("creationDate", formattedDate2);
-                //}
-                // Substituir o placeholder da creationDate
 
                 DocumentFormat.OpenXml.Wordprocessing.Table table = body.Elements<DocumentFormat.OpenXml.Wordprocessing.Table>().FirstOrDefault();
 
@@ -259,7 +329,7 @@ namespace OrcamentoMaker3000.Views.Pages
                     foreach (int duration in OrcamentoModel.Instance.SelectedDurations)
                     {
                         // Calcular a cotação para a duração selecionada
-                        double cotation = CalcularCotationParaDuracao(duration);
+                        double cotation = CalcularCotationParaDuracao(duration,outputPath);
 
                         // Clonar a linha modelo, se houver
                         DocumentFormat.OpenXml.Wordprocessing.TableRow newRow = (templateRow != null)
@@ -317,30 +387,41 @@ namespace OrcamentoMaker3000.Views.Pages
             }
         }
 
-        private double CalcularCotationParaDuracao(int duration)
+        private double CalcularCotationParaDuracao(int duration, string outputPath)
         {
             // Obter o valor base por músico para a duração específica
             double baseValue = OrcamentoModel.Instance.ValuePerMusician[duration];
+            Logger($"Valor p/ musico para {duration} min: {baseValue}", outputPath);
 
             // Calcular o valor total base para o número de músicos
             double totalBaseValue = baseValue * OrcamentoModel.Instance.NumberMusicians;
+            Logger($"Valor Base do grupo para {duration} min: {totalBaseValue}", outputPath);
 
             // Calcular despesas de viagem
             double travelExpenses = OrcamentoModel.Instance.KilometerPrice * OrcamentoModel.Instance.Distance;
+            Logger($"Despesas de Viagem: Preço do quilometro {OrcamentoModel.Instance.KilometerPrice} x {OrcamentoModel.Instance.Distance}km = {travelExpenses}€", outputPath);
 
             // Calcular o salário extra baseado na distância
-            double extraSalary = CalcularExtraSalary(OrcamentoModel.Instance.Distance);
+            double extraSalary = CalcularExtraSalary(OrcamentoModel.Instance.Distance, outputPath);
+            Logger($"Salário extra por distância: {extraSalary}",outputPath);
+
 
             // Calcular poupança do grupo e salário do manager
             double groupSavings = totalBaseValue * OrcamentoModel.Instance.GroupSavings;
+            Logger($"Percentagem para o grupo: Base({totalBaseValue}) x {OrcamentoModel.Instance.GroupSavings} = {groupSavings}", outputPath);
+
             double managerSalary = totalBaseValue * OrcamentoModel.Instance.ManagerSalary;
+            Logger($"Percentagem para o manager: Base({totalBaseValue}) x {OrcamentoModel.Instance.ManagerSalary} = {managerSalary}", outputPath);
 
             // Calcular a cotação final
             double cotation = totalBaseValue + extraSalary + travelExpenses + groupSavings + managerSalary + OrcamentoModel.Instance.AlimentationExpenses + OrcamentoModel.Instance.ExtraExpenses;
 
+            Logger($"Base: {totalBaseValue} + Extra (dist): {extraSalary} + Transporte: {travelExpenses} + Poupança para o Grupo: {groupSavings} + Manager : {managerSalary} + Alimentacao: {OrcamentoModel.Instance.AlimentationExpenses} + Despesas Extra: {OrcamentoModel.Instance.ExtraExpenses} = {cotation}€", outputPath);
             // Arredondar para o valor mais próximo de 50 ou 00
             return Math.Ceiling(cotation / 50) * 50;
+            Logger($"Arredonda para: {cotation}€", outputPath);
         }
+
 
 
         private void ConverterParaPdf(string docPath)
@@ -366,7 +447,30 @@ namespace OrcamentoMaker3000.Views.Pages
                 MessageBox.Show($"Erro ao converter para PDF: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        private void Logger(string message, string outputPath)
+        {
+            // Verificar se o diretório de logs existe
+            VerificarECriarDiretorioLogs();
 
+            // Definir o caminho do arquivo de log
+            string logFilePath = Path.Combine(OrcamentoModel.Instance.SavePath, "logs", $"{Path.GetFileNameWithoutExtension(outputPath)}.txt");
+
+            // Adicionar a mensagem ao log com data e hora
+            using (StreamWriter writer = new StreamWriter(logFilePath, true))
+            {
+                writer.WriteLine($"{DateTime.Now}: {message}");
+            }
+        }
+
+        private void VerificarECriarDiretorioLogs()
+        {
+            string logPath = Path.Combine(OrcamentoModel.Instance.SavePath, "logs");
+
+            if (!Directory.Exists(logPath))
+            {
+                Directory.CreateDirectory(logPath);
+            }
+        }
 
     }
 
