@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:OrcamentoMaker3000.Views.Pages" xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d" 
-      Background="White"
+      Background="#F8F9FC"
       Foreground="Black"
       d:DesignHeight="850" d:DesignWidth="800"
       Title="Orcamento">
@@ -72,13 +72,44 @@
             <TextBlock Grid.Row="8" Grid.Column="0" Text="Distância (km)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
             <TextBox x:Name="DistanciaText" Grid.Row="8" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
-            <TextBlock Grid.Row="9" Grid.Column="0" Text="Localização dos ficheiros" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
-            <Button Grid.Row="9" HorizontalAlignment="Center" Grid.Column="1" BorderBrush="Black"  Click="Escolher_Diretorio" Content="Escolher Pasta" VerticalAlignment="Center" Margin="10,10,10,10"/>
-            <Button Grid.Row="9" HorizontalAlignment="Center" Grid.Column="2" BorderBrush="Black"  Click="GerarOrcamento" Content="Gerar Orçamento" VerticalAlignment="Center" Margin="10,10,10,10"/>
+            <StackPanel Grid.Row="9" Grid.Column="0"  Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,10,10,10">
+
+                <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="5,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Click="Escolher_Diretorio" Content="Escolher Pasta" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Stretch" 
+                Padding="10,5" 
+                BorderThickness="0"
+                Background="Transparent"/>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FBB03B"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+                <ToggleButton x:Name="TogglePdfBtn" Content="Gerar PDF" IsChecked="False" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10"/>
+                <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="5,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Click="GerarOrcamento" Content="Gerar Orçamento" 
+                VerticalAlignment="Center" 
+                HorizontalAlignment="Stretch" 
+                Padding="10,5" 
+                BorderThickness="0"
+                Background="Transparent"/>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FBB03B"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+            </StackPanel>
         </Grid>
-
-
-
     </Grid>
-
 </Page>

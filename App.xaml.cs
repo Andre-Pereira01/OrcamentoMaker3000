@@ -51,6 +51,9 @@ namespace OrcamentoMaker3000
 
                 services.AddSingleton<SettingsViewModel>();
 
+                services.AddSingleton<Acerca>();
+
+
             }).Build();
 
         /// <summary>

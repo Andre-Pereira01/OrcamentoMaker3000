@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:OrcamentoMaker3000.Views.Pages" xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d" 
       d:DesignHeight="900" d:DesignWidth="800"
-      Background="White"
+      Background="#F8F9FC"
       Foreground="Black"
       Title="Definicoes">
 
@@ -30,7 +30,7 @@
                             <Style TargetType="{x:Type Border}">
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="LightBlue"/>
+                                        <Setter Property="Background" Value="#FBB03B"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -57,11 +57,11 @@
                     </Grid.ColumnDefinitions>
 
                     <!--<TextBlock Grid.Row="0" Grid.Column="0" Text="Preço do Quilometro (cents)"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,10,0"/>-->
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="€/km (cent.)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Preço km(€)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
                     <TextBox x:Name="PrecokmText" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Width="Auto"  Margin="0,5,5,0" VerticalAlignment="Center">
                     </TextBox>
 
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Poupança Grupo (%)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Poupança Grupo(%)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,10,10,0"/>
                     <TextBox x:Name="GrupoText" Grid.Row="1" Grid.Column="1" Width="Auto"   HorizontalAlignment="Stretch" Margin="0,10,10,0" VerticalAlignment="Center"/>
 
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Manager(%)" VerticalAlignment="Center"  HorizontalAlignment="Right" Margin="0,10,10,0"/>
@@ -95,7 +95,7 @@
                             <Style TargetType="{x:Type Border}">
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="LightBlue"/>
+                                        <Setter Property="Background" Value="#FBB03B"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -169,7 +169,7 @@
                             <Style TargetType="{x:Type Border}">
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="LightBlue"/>
+                                        <Setter Property="Background" Value="#FBB03B"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>

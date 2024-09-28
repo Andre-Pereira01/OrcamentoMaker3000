@@ -1,0 +1,56 @@
+﻿<Page x:Class="OrcamentoMaker3000.Views.Pages.Acerca"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:OrcamentoMaker3000.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Acerca">
+
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Imagem -->
+        <Image 
+               HorizontalAlignment="Center" 
+               VerticalAlignment="Top"
+               Width="386" Height="252" 
+               Source="pack://application:,,,/Assets/mb.jpg" 
+               Stretch="Uniform" Margin="0,108,0,0" 
+               RenderOptions.BitmapScalingMode="HighQuality"
+        />
+
+
+
+
+        <!-- Texto -->
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20">
+  
+            <TextBlock TextWrapping="Wrap"
+                       FontSize="16"
+                       Margin="0,0,0,10">
+                Esta aplicação foi desenvolvida por André Pereira para agilizar e automatizar o processo de geração de orçamentos para a Monção Brass, uma brass band portuguesa. Com esta aplicação, pretendemos poupar tempo e garantir mais eficiência na criação de orçamentos para os nossos clientes e eventos.
+            </TextBlock>
+
+            <TextBlock TextWrapping="Wrap" 
+                       FontSize="16">
+                Se tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato através do seguinte e-mail:
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <TextBlock Text="&#x2709;" 
+                           FontWeight="Bold" 
+                           FontSize="16"
+                           Foreground="Black"
+                           Margin="0,0,5,0"/>
+                <TextBlock Text="andre3699@gmail.com" 
+                           FontWeight="Bold" 
+                           FontSize="16"
+                           Foreground="Black"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -17,6 +17,7 @@
   <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="3.1.0" />
     <PackageReference Include="DocX" Version="3.0.1" />
+    <PackageReference Include="FreeSpire.Doc" Version="12.2.0" />
     <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1004" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
@@ -27,11 +28,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\mb.jpg" />
+    <None Remove="Assets\ndre.jpeg" />
     <None Remove="Assets\wpfui-icon-256.png" />
     <None Remove="Assets\wpfui-icon-1024.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\mb.jpg" />
+    <Resource Include="Assets\ndre.jpeg" />
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />
   </ItemGroup>

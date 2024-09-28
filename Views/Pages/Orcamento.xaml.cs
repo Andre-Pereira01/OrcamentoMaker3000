@@ -1,25 +1,13 @@
 ﻿using OrcamentoMaker3000.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Xceed.Words.NET;
 using System.IO;
 using Ookii.Dialogs.Wpf;
 using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Wordprocessing;
-using Microsoft.Office.Interop.Word;
 using Newtonsoft.Json;
+using System;
+using System.Windows;
+using Spire.Doc;
+using Spire.Doc.Documents;
 
 
 
@@ -33,12 +21,9 @@ namespace OrcamentoMaker3000.Views.Pages
         public Orcamento()
         {
             InitializeComponent();
-            // Preencher o comboBox de Duração com as opções
-            //DuraçãoCombo.ItemsSource = new int[] { 15, 30, 45, 60, 90 };
-
             LoadConfig();
         }
-        
+
         private void LoadConfig()
         {
             // Definir o caminho do arquivo config.json
@@ -94,9 +79,9 @@ namespace OrcamentoMaker3000.Views.Pages
 
             if (string.IsNullOrWhiteSpace(HorarioBox.Text))
             {
-               HorarioBox.Text = "A definir";
+                HorarioBox.Text = "A definir";
             }
-            if(string.IsNullOrWhiteSpace(ClientPhoneTextBox.Text))
+            if (string.IsNullOrWhiteSpace(ClientPhoneTextBox.Text))
             {
                 ClientPhoneTextBox.Text = "N/A";
             }
@@ -104,7 +89,7 @@ namespace OrcamentoMaker3000.Views.Pages
             {
                 ClientEmailTextBox.Text = "N/A";
             }
-           
+
             // Preencher os valores no modelo
             OrcamentoModel.Instance.ClientName = ClientNameTextBox.Text;
             OrcamentoModel.Instance.ClientPhone = ClientPhoneTextBox.Text;
@@ -124,42 +109,15 @@ namespace OrcamentoMaker3000.Views.Pages
             if (Duration45CheckBox.IsChecked == true) OrcamentoModel.Instance.SelectedDurations.Add(45);
             if (Duration60CheckBox.IsChecked == true) OrcamentoModel.Instance.SelectedDurations.Add(60);
             if (Duration90CheckBox.IsChecked == true) OrcamentoModel.Instance.SelectedDurations.Add(90);
-           
+
             if (!OrcamentoModel.Instance.SelectedDurations.Any())
             {
                 MessageBox.Show("Por favor, selecione pelo menos uma duração para o orçamento.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            //// Verificar se há durações selecionadas
-
-
-            //// Cálculo do valor base por músico
-            //double baseValue = OrcamentoModel.Instance.ValuePerMusician[OrcamentoModel.Instance.Duration];
-            //double totalBaseValue = baseValue * OrcamentoModel.Instance.NumberMusicians;
-            //OrcamentoModel.Instance.TotalBaseValue = totalBaseValue;
-
-            //// Calcular despesas de viagem
-            //double travelExpenses = OrcamentoModel.Instance.KilometerPrice * OrcamentoModel.Instance.Distance;
-            //OrcamentoModel.Instance.TravelExpenses = travelExpenses;
-
-            //// Calcular salário extra baseado na distância
-            //double extraSalary = CalcularExtraSalary(OrcamentoModel.Instance.Distance);
-
-            //// Calcular a poupança do grupo e o salário do manager
-            //double groupSavings = totalBaseValue * OrcamentoModel.Instance.GroupSavings;
-            //double managerSalary = totalBaseValue * OrcamentoModel.Instance.ManagerSalary;
-
-
-            //// Cotação final
-            //double cotation = totalBaseValue + extraSalary + travelExpenses + groupSavings + managerSalary + OrcamentoModel.Instance.AlimentationExpenses + OrcamentoModel.Instance.ExtraExpenses;
-            //// Arredondar para o valor mais próximo de 50 ou 00
-            //OrcamentoModel.Instance.Cotation = Math.Ceiling(cotation / 50) * 50;
-
             AtualizarNumberOrc();
-
             PreencherDocumentoWord();
-            //MessageBox.Show($"Orçamento gerado com sucesso!\nCotação: {OrcamentoModel.Instance.Cotation:C2}", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         private void AtualizarNumberOrc()
         {
@@ -197,8 +155,6 @@ namespace OrcamentoMaker3000.Views.Pages
             OrcamentoModel.Instance.NumberOrc = numberOrc + 1;
         }
 
-
-        // Função para calcular o salário extra com base na distância
         private double CalcularExtraSalary(double distance)
         {
             //if (distance < 30)
@@ -251,11 +207,11 @@ namespace OrcamentoMaker3000.Views.Pages
             using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(outputPath, true))
             {
                 var body = wordDoc.MainDocumentPart.Document.Body;
-                foreach (var text in body.Descendants<Text>())
+                foreach (var text in body.Descendants<DocumentFormat.OpenXml.Wordprocessing.Text>())/*Text*/
                 {
                     // Substituir placeholders pelos valores reais
                     if (text.Text.Contains("neneim")) text.Text = text.Text.Replace("neneim", "0" + OrcamentoModel.Instance.NumberOrc.ToString());
-                    if(text.Text.Contains("yearVar")) text.Text = text.Text.Replace("yearVar", DateTime.Now.Year.ToString());
+                    if (text.Text.Contains("yearVar")) text.Text = text.Text.Replace("yearVar", DateTime.Now.Year.ToString());
                     if (text.Text.Contains("clientName")) text.Text = text.Text.Replace("clientName", OrcamentoModel.Instance.ClientName);
                     if (text.Text.Contains("clientPhone")) text.Text = text.Text.Replace("clientPhone", OrcamentoModel.Instance.ClientPhone);
                     if (text.Text.Contains("clientEmail")) text.Text = text.Text.Replace("clientEmail", OrcamentoModel.Instance.ClientEmail);
@@ -263,20 +219,35 @@ namespace OrcamentoMaker3000.Views.Pages
                     if (text.Text.Contains("date"))
                     {
                         string formattedDate1 = OrcamentoModel.Instance.Date.ToString("dd 'de' MMMM 'de' yyyy", new System.Globalization.CultureInfo("pt-PT"));
-                        text.Text = text.Text.Replace("date", formattedDate1);
+                        int startIndex = formattedDate1.IndexOf("de", 3) + 3; // Pega o índice depois do segundo "de"
+                        string capitalizedMonthDate1 = formattedDate1.Substring(0, startIndex) + char.ToUpper(formattedDate1[startIndex]) + formattedDate1.Substring(startIndex + 1);
+
+                        text.Text = text.Text.Replace("date", capitalizedMonthDate1);
                     }
                     if (text.Text.Contains("schedule")) text.Text = text.Text.Replace("schedule", OrcamentoModel.Instance.Schedule);
                     if (text.Text.Contains("location")) text.Text = text.Text.Replace("location", OrcamentoModel.Instance.Location);
                     if (text.Text.Contains("creationDate"))
                     {
                         string formattedDate2 = OrcamentoModel.Instance.CreationDate.ToString("dd 'de' MMMM 'de' yyyy", new System.Globalization.CultureInfo("pt-PT"));
-                        text.Text = text.Text.Replace("creationDate", formattedDate2);
-                    }
-                    //if (text.Text.Contains("duration1")) text.Text = text.Text.Replace("duration1", OrcamentoModel.Instance.Duration.ToString() + "min");
-                    //if (text.Text.Contains("cotation1")) text.Text = text.Text.Replace("cotation1", OrcamentoModel.Instance.Cotation.ToString("C2"));
-                }
+                        int startIndex = formattedDate2.IndexOf("de", 3) + 3; // Pega o índice depois do segundo "de"
+                        string capitalizedMonthDate2 = formattedDate2.Substring(0, startIndex) + char.ToUpper(formattedDate2[startIndex]) + formattedDate2.Substring(startIndex + 1);
 
-               
+                        text.Text = text.Text.Replace("creationDate", capitalizedMonthDate2);
+                    }
+
+                }
+                //if (text.Text.Contains("date"))
+                //{
+                //    string formattedDate1 = OrcamentoModel.Instance.Date.ToString("dd 'de' MMMM 'de' yyyy", new System.Globalization.CultureInfo("pt-PT"));
+                //    text.Text = text.Text.Replace("date", formattedDate1);
+                //}
+                //if (text.Text.Contains("creationDate"))
+                //{
+                //    string formattedDate2 = OrcamentoModel.Instance.CreationDate.ToString("dd 'de' MMMM 'de' yyyy", new System.Globalization.CultureInfo("pt-PT"));
+                //    text.Text = text.Text.Replace("creationDate", formattedDate2);
+                //}
+                // Substituir o placeholder da creationDate
+
                 DocumentFormat.OpenXml.Wordprocessing.Table table = body.Elements<DocumentFormat.OpenXml.Wordprocessing.Table>().FirstOrDefault();
 
                 if (table != null)
@@ -339,8 +310,11 @@ namespace OrcamentoMaker3000.Views.Pages
             }
 
             MessageBox.Show($"Orçamento criado na pasta: {outputPath}", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
-            
-            //ConverterParaPdf(outputPath);
+
+            if (TogglePdfBtn.IsChecked == true)
+            {
+                ConverterParaPdf(outputPath);
+            }
         }
 
         private double CalcularCotationParaDuracao(int duration)
@@ -368,32 +342,28 @@ namespace OrcamentoMaker3000.Views.Pages
             return Math.Ceiling(cotation / 50) * 50;
         }
 
+
         private void ConverterParaPdf(string docPath)
         {
-            // Usar namespace explícito para o Application do Word Interop
-            Microsoft.Office.Interop.Word.Application wordApp = new Microsoft.Office.Interop.Word.Application();
-            Microsoft.Office.Interop.Word.Document wordDoc = null;
-
             try
             {
-                // Usar System.IO.Path para manipular o caminho
-                string pdfPath = System.IO.Path.ChangeExtension(docPath, ".pdf"); // Altera a extensão para PDF
+                // Cria uma instância do documento
+                Document document = new Document();
 
-                // Abrir o documento Word
-                wordDoc = wordApp.Documents.Open(docPath);
-                wordDoc.ExportAsFixedFormat(pdfPath, Microsoft.Office.Interop.Word.WdExportFormat.wdExportFormatPDF);
+                // Carrega o ficheiro Word existente
+                document.LoadFromFile(docPath);
+
+                // Define o caminho para salvar o PDF
+                string pdfPath = System.IO.Path.ChangeExtension(docPath, ".pdf");
+
+                // Converte e salva o documento como PDF
+                document.SaveToFile(pdfPath, FileFormat.PDF);
 
                 MessageBox.Show($"Orçamento em PDF salvo em: {pdfPath}", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Erro ao converter para PDF: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                // Fechar o documento e o aplicativo Word
-                wordDoc?.Close();
-                wordApp.Quit();
             }
         }
 

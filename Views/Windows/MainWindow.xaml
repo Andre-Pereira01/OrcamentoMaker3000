@@ -15,8 +15,9 @@
     d:DesignWidth="800"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    ExtendsContentIntoTitleBar="True"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    ExtendsContentIntoTitleBar="True"
+   
     WindowBackdropType="Mica"
     WindowCornerPreference="Round"
     WindowStartupLocation="CenterScreen"
@@ -70,7 +71,7 @@
            Grid.Row="0"
            HorizontalAlignment="Right"
            VerticalAlignment="Top"
-           Margin="0,25,65,30"
+           Margin="0,29,65,0"
            RenderOptions.BitmapScalingMode="HighQuality" />
 
     </Grid>
