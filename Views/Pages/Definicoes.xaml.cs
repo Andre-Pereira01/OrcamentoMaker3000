@@ -46,12 +46,12 @@ namespace OrcamentoMaker3000.Views.Pages
                 // Inicializar os dicionários caso estejam nulos
                 OrcamentoModel.Instance.ValuePerMusician = config.ValuePerMusician ?? new Dictionary<int, double>();
                 OrcamentoModel.Instance.ExtraSalary = config.ExtraSalary ?? new Dictionary<int, double>();
-                OrcamentoModel.Instance.KilometerPrice = config.KilometerPrice;
+                //OrcamentoModel.Instance.KilometerPrice = config.KilometerPrice;
                 OrcamentoModel.Instance.GroupSavings = config.GroupSavings;
                 OrcamentoModel.Instance.ManagerSalary = config.ManagerSalary;
 
                 // Atualizar a interface com os valores carregados
-                PrecokmText.Text = OrcamentoModel.Instance.KilometerPrice.ToString();
+                //PrecokmText.Text = OrcamentoModel.Instance.KilometerPrice.ToString();
                 GrupoText.Text = (OrcamentoModel.Instance.GroupSavings * 100).ToString(); // Poupança em %
                 ManagerBox.Text = (OrcamentoModel.Instance.ManagerSalary * 100).ToString(); // Salário do Manager em %
                 AlimentaçãoBox.Text = OrcamentoModel.Instance.AlimentationExpenses.ToString();
@@ -63,19 +63,33 @@ namespace OrcamentoMaker3000.Views.Pages
                 ValueFor60MinTextBox.Text = OrcamentoModel.Instance.ValuePerMusician[60].ToString();
                 ValueFor90MinTextBox.Text = OrcamentoModel.Instance.ValuePerMusician[90].ToString();
 
-                // Atualizar valores de salários extras
-                DistanceLimit1TextBox.Text = "30"; // Se você quer tornar essas variáveis dinâmicas, pode carregar do arquivo
-                Salary1TextBox.Text = OrcamentoModel.Instance.ExtraSalary[30].ToString();
+                // Carregar os valores do dicionário e preencher a UI
+                var distanceKeys = OrcamentoModel.Instance.ExtraSalary.Keys.OrderBy(k => k).ToList();
+                DistanceLimit1TextBox.Text = distanceKeys[0].ToString();
+                Salary1TextBox.Text = OrcamentoModel.Instance.ExtraSalary[distanceKeys[0]].ToString();
 
-                DistanceLimit2TextBox.Text = "100";
-                Salary2TextBox.Text = OrcamentoModel.Instance.ExtraSalary[100].ToString();
+                DistanceLimit2TextBox.Text = distanceKeys[1].ToString();
+                Salary2TextBox.Text = OrcamentoModel.Instance.ExtraSalary[distanceKeys[1]].ToString();
 
-                DistanceLimit3TextBox.Text = "200";
-                Salary3TextBox.Text = OrcamentoModel.Instance.ExtraSalary[200].ToString();
+                DistanceLimit3TextBox.Text = distanceKeys[2].ToString();
+                Salary3TextBox.Text = OrcamentoModel.Instance.ExtraSalary[distanceKeys[2]].ToString();
 
-                DistanceLimit4TextBox.Text = "999";
-                Salary4TextBox.Text = OrcamentoModel.Instance.ExtraSalary[999].ToString();
+                DistanceLimit4TextBox.Text = distanceKeys[3].ToString();
+                Salary4TextBox.Text = OrcamentoModel.Instance.ExtraSalary[distanceKeys[3]].ToString();
             }
+            //    // Atualizar valores de salários extras
+            //    DistanceLimit1TextBox.Text = "30"; // Se você quer tornar essas variáveis dinâmicas, pode carregar do arquivo
+            //    Salary1TextBox.Text = OrcamentoModel.Instance.ExtraSalary[30].ToString();
+
+            //    DistanceLimit2TextBox.Text = "100";
+            //    Salary2TextBox.Text = OrcamentoModel.Instance.ExtraSalary[100].ToString();
+
+            //    DistanceLimit3TextBox.Text = "200";
+            //    Salary3TextBox.Text = OrcamentoModel.Instance.ExtraSalary[200].ToString();
+
+            //    DistanceLimit4TextBox.Text = "999";
+            //    Salary4TextBox.Text = OrcamentoModel.Instance.ExtraSalary[999].ToString();
+            //}
             else
             {
                 MessageBox.Show("Ficheiro de configuração não encontrado.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -107,11 +121,11 @@ namespace OrcamentoMaker3000.Views.Pages
                     config = new Config(); // Se não existe, cria um novo
                 }
 
-                // Atualizar apenas os valores de definições principais
-                if (double.TryParse(PrecokmText.Text, out var kilometerPrice))
-                {
-                    config.KilometerPrice = kilometerPrice;
-                }
+                //// Atualizar apenas os valores de definições principais
+                //if (double.TryParse(PrecokmText.Text, out var kilometerPrice))
+                //{
+                //    config.KilometerPrice = kilometerPrice;
+                //}
 
                 if (double.TryParse(GrupoText.Text, out var groupSavings))
                 {
@@ -141,82 +155,142 @@ namespace OrcamentoMaker3000.Views.Pages
                 MessageBox.Show("Erro ao guardar valores principais: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void Save_Extra(object sender, RoutedEventArgs e)
         {
             try
             {
-                // Definir o caminho do arquivo config.json
                 string configFilePath = System.IO.Path.Combine(_savePath, "config.json");
 
+                // Carregar ou criar novo arquivo de configuração
                 Config config;
                 if (File.Exists(configFilePath))
                 {
-                    // Carregar o JSON existente
                     string json = File.ReadAllText(configFilePath);
                     config = JsonConvert.DeserializeObject<Config>(json);
                 }
                 else
                 {
-                    config = new Config(); // Se não existe, cria um novo
+                    config = new Config();
                 }
 
-                // Atualizar apenas as faixas de salário extra com variáveis dinâmicas
+                // Capturar os valores de distância e salário da UI
                 if (int.TryParse(DistanceLimit1TextBox.Text, out var distance1) &&
-                    double.TryParse(Salary1TextBox.Text, out var salary1))
+                    int.TryParse(DistanceLimit2TextBox.Text, out var distance2) &&
+                    int.TryParse(DistanceLimit3TextBox.Text, out var distance3) &&
+                    int.TryParse(DistanceLimit4TextBox.Text, out var distance4) &&
+                    double.TryParse(Salary1TextBox.Text, out var salary1) &&
+                    double.TryParse(Salary2TextBox.Text, out var salary2) &&
+                    double.TryParse(Salary3TextBox.Text, out var salary3) &&
+                    double.TryParse(Salary4TextBox.Text, out var salary4))
                 {
-                    if (config.ExtraSalary.ContainsKey(distance1))
+                    // Validar se as distâncias estão em ordem crescente
+                    if (distance1 < distance2 && distance2 < distance3 && distance3 < distance4)
                     {
-                        config.ExtraSalary[distance1] = salary1; // Atualizar existente
+                        // Substituir os valores no dicionário de ExtraSalary
+                        config.ExtraSalary.Clear(); // Limpar os valores antigos
+                        config.ExtraSalary[distance1] = salary1;
+                        config.ExtraSalary[distance2] = salary2;
+                        config.ExtraSalary[distance3] = salary3;
+                        config.ExtraSalary[distance4] = salary4;
+
+                        // Salvar o JSON atualizado no arquivo
+                        string updatedJson = JsonConvert.SerializeObject(config, Formatting.Indented);
+                        File.WriteAllText(configFilePath, updatedJson);
+
+                        MessageBox.Show("Salários extras atualizados!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
-                        config.ExtraSalary.Add(distance1, salary1); // Adicionar nova entrada
+                        MessageBox.Show("Os valores de distância devem estar em ordem crescente.", "Erro de Validação", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
-
-                if (int.TryParse(DistanceLimit2TextBox.Text, out var distance2) &&
-                    double.TryParse(Salary2TextBox.Text, out var salary2))
+                else
                 {
-                    if (config.ExtraSalary.ContainsKey(distance2))
-                    {
-                        config.ExtraSalary[distance2] = salary2; // Atualizar existente
-                    }
-                    else
-                    {
-                        config.ExtraSalary.Add(distance2, salary2); // Adicionar nova entrada
-                    }
+                    MessageBox.Show("Erro ao ler os valores de distância ou salário.", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
-                if (int.TryParse(DistanceLimit3TextBox.Text, out var distance3) &&
-                    double.TryParse(Salary3TextBox.Text, out var salary3))
-                {
-                    if (config.ExtraSalary.ContainsKey(distance3))
-                    {
-                        config.ExtraSalary[distance3] = salary3; // Atualizar existente
-                    }
-                    else
-                    {
-                        config.ExtraSalary.Add(distance3, salary3); // Adicionar nova entrada
-                    }
-                }
-
-                if (double.TryParse(Salary4TextBox.Text, out var salary4))
-                {
-                    config.ExtraSalary[999] = salary4; // Atualizar a distância acima de 150 km (sempre 999)
-                }
-
-                // Salvar o JSON atualizado no arquivo
-                string updatedJson = JsonConvert.SerializeObject(config, Formatting.Indented);
-                File.WriteAllText(configFilePath, updatedJson);
-
-                MessageBox.Show("Salários extras atualizados!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao guardar salários extras: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
+        //private void Save_Extra(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        // Definir o caminho do arquivo config.json
+        //        string configFilePath = System.IO.Path.Combine(_savePath, "config.json");
+
+        //        Config config;
+        //        if (File.Exists(configFilePath))
+        //        {
+        //            // Carregar o JSON existente
+        //            string json = File.ReadAllText(configFilePath);
+        //            config = JsonConvert.DeserializeObject<Config>(json);
+        //        }
+        //        else
+        //        {
+        //            config = new Config(); // Se não existe, cria um novo
+        //        }
+
+        //        // Atualizar apenas as faixas de salário extra com variáveis dinâmicas
+        //        if (int.TryParse(DistanceLimit1TextBox.Text, out var distance1) &&
+        //            double.TryParse(Salary1TextBox.Text, out var salary1))
+        //        {
+        //            if (config.ExtraSalary.ContainsKey(distance1))
+        //            {
+        //                config.ExtraSalary[distance1] = salary1; // Atualizar existente
+        //            }
+        //            else
+        //            {
+        //                config.ExtraSalary.Add(distance1, salary1); // Adicionar nova entrada
+        //            }
+        //        }
+
+        //        if (int.TryParse(DistanceLimit2TextBox.Text, out var distance2) &&
+        //            double.TryParse(Salary2TextBox.Text, out var salary2))
+        //        {
+        //            if (config.ExtraSalary.ContainsKey(distance2))
+        //            {
+        //                config.ExtraSalary[distance2] = salary2; // Atualizar existente
+        //            }
+        //            else
+        //            {
+        //                config.ExtraSalary.Add(distance2, salary2); // Adicionar nova entrada
+        //            }
+        //        }
+
+        //        if (int.TryParse(DistanceLimit3TextBox.Text, out var distance3) &&
+        //            double.TryParse(Salary3TextBox.Text, out var salary3))
+        //        {
+        //            if (config.ExtraSalary.ContainsKey(distance3))
+        //            {
+        //                config.ExtraSalary[distance3] = salary3; // Atualizar existente
+        //            }
+        //            else
+        //            {
+        //                config.ExtraSalary.Add(distance3, salary3); // Adicionar nova entrada
+        //            }
+        //        }
+
+        //        if (double.TryParse(Salary4TextBox.Text, out var salary4))
+        //        {
+        //            config.ExtraSalary[999] = salary4; // Atualizar a distância acima de 150 km (sempre 999)
+        //        }
+
+        //        // Salvar o JSON atualizado no arquivo
+        //        string updatedJson = JsonConvert.SerializeObject(config, Formatting.Indented);
+        //        File.WriteAllText(configFilePath, updatedJson);
+
+        //        MessageBox.Show("Salários extras atualizados!", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Erro ao guardar salários extras: " + ex.Message, "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
+        //}
 
         private void Save_ValoresBase(object sender, RoutedEventArgs e)
         {

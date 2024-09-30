@@ -49,30 +49,30 @@
 
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20*"/>
                         <ColumnDefinition Width="30*"/>
-                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="30*"/>
+                        <ColumnDefinition Width="40*"/>
 
 
                     </Grid.ColumnDefinitions>
 
-                    <!--<TextBlock Grid.Row="0" Grid.Column="0" Text="Preço do Quilometro (cents)"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,10,0"/>-->
+                    <!--<TextBlock Grid.Row="0" Grid.Column="0" Text="Preço do Quilometro (cents)"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,10,0"/>--><!--
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Preço km(€)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
                     <TextBox x:Name="PrecokmText" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Width="Auto"  Margin="0,5,5,0" VerticalAlignment="Center">
+                    </TextBox>-->
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Poupança Grupo(%)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,10,10,0"/>
+                    <TextBox x:Name="GrupoText" Grid.Row="0" Grid.Column="1" Width="Auto"   HorizontalAlignment="Stretch" Margin="0,10,10,0" VerticalAlignment="Center"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Manager(%)" VerticalAlignment="Center"  HorizontalAlignment="Right" Margin="0,10,10,0"/>
+                    <TextBox Name="ManagerBox" Grid.Row="1" Grid.Column="1" Width="Auto"   HorizontalAlignment="Stretch" Margin="0,10,10,0" VerticalAlignment="Center">
                     </TextBox>
 
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Poupança Grupo(%)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,10,10,0"/>
-                    <TextBox x:Name="GrupoText" Grid.Row="1" Grid.Column="1" Width="Auto"   HorizontalAlignment="Stretch" Margin="0,10,10,0" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Alimentação(€)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+                    <TextBox x:Name="AlimentaçãoBox" Grid.Row="2" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Manager(%)" VerticalAlignment="Center"  HorizontalAlignment="Right" Margin="0,10,10,0"/>
-                    <TextBox Name="ManagerBox" Grid.Row="2" Grid.Column="1" Width="Auto"   HorizontalAlignment="Stretch" Margin="0,10,10,0" VerticalAlignment="Center">
-                    </TextBox>
-
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Alimentação(€)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
-                    <TextBox x:Name="AlimentaçãoBox" Grid.Row="3" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
-
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Despesas Extra(€)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
-                    <TextBox x:Name="ExtraBox" Grid.Row="4" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Despesas Extra(€)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+                    <TextBox x:Name="ExtraBox" Grid.Row="3" Grid.Column="1" Text="0"  Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
                 </Grid>
             </Grid>
         </TabItem>

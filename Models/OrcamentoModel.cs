@@ -27,7 +27,7 @@ namespace OrcamentoMaker3000.Models
         private DateTime _creationDate;
         private Dictionary<int, double> _valuePerMusician;
         private int _numberMusicians = 6;
-        private double _kilometerPrice = 0.20;
+        //private double _kilometerPrice = 0.20;
         private double _distance;
         private double _travelExpenses;
         private double _totalBaseValue;
@@ -157,15 +157,15 @@ namespace OrcamentoMaker3000.Models
                 OnPropertyChanged(nameof(NumberMusicians));
             }
         }
-        public double KilometerPrice
-        {
-            get => _kilometerPrice;
-            set
-            {
-                _kilometerPrice = value;
-                OnPropertyChanged(nameof(KilometerPrice));
-            }
-        }
+        //public double KilometerPrice
+        //{
+        //    get => _kilometerPrice;
+        //    set
+        //    {
+        //        _kilometerPrice = value;
+        //        OnPropertyChanged(nameof(KilometerPrice));
+        //    }
+        //}
         public double Distance
         {
             get => _distance;
