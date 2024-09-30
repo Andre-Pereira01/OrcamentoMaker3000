@@ -390,7 +390,7 @@ namespace OrcamentoMaker3000.Views.Pages
         {
             var dialog = new VistaFolderBrowserDialog
             {
-                Description = "Selecione a pasta onde os orçamentos serão salvos",
+                Description = "Selecione a pasta onde os orçamentos serão guardados",
                 UseDescriptionForTitle = true, // Mostra o título corretamente
                 SelectedPath = _savePath
             };
