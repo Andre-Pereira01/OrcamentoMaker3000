@@ -53,6 +53,8 @@ namespace OrcamentoMaker3000
 
                 services.AddSingleton<Acerca>();
 
+                services.AddSingleton<WebViewWindow>();
+
 
             }).Build();
 

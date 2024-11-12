@@ -91,14 +91,37 @@
                         </Style>
                     </Border.Style>
                 </Border>
+
+                <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="5,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Click="CalcViagem"  Content="Despesas Viagem" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Stretch" 
+                       Padding="10,5" 
+                       BorderThickness="0"
+                       Background="Transparent"/>
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FBB03B"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
+
+            </StackPanel>
+            <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,10,10,10" >
+
                 <ToggleButton x:Name="TogglePdfBtn" Content="Gerar PDF" IsChecked="False" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10"/>
+
                 <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="5,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Button Click="GerarOrcamento" Content="Gerar Orçamento" 
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Stretch" 
-                Padding="10,5" 
-                BorderThickness="0"
-                Background="Transparent"/>
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="Stretch" 
+                         Padding="10,5" 
+                         BorderThickness="0"
+                         Background="Transparent"/>
                     <Border.Style>
                         <Style TargetType="{x:Type Border}">
                             <Style.Triggers>
