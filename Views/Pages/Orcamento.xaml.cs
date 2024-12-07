@@ -48,6 +48,7 @@ namespace OrcamentoMaker3000.Views.Pages
 
         private void LoadConfig()
         {
+
             // Definir o caminho do arquivo config.json
             string configFilePath = System.IO.Path.Combine(OrcamentoModel.Instance.SavePath, "config.json");
 

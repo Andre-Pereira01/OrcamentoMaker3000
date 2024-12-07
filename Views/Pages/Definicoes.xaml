@@ -194,18 +194,26 @@
 
                     <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" Text="15 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
                     <TextBox x:Name="ValueFor15MinTextBox" FontSize="20" Grid.Row="0" Grid.Column="1" Margin="0,10,10,0" MinWidth="65"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" FontSize="20" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
 
                     <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20" Text="30 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
                     <TextBox x:Name="ValueFor30MinTextBox" FontSize="20" Grid.Row="1" Grid.Column="1" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="1" Grid.Column="2" FontSize="20" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
+
 
                     <TextBlock Grid.Row="2" Grid.Column="0" FontSize="20" Text="45 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
                     <TextBox x:Name="ValueFor45MinTextBox" FontSize="20"  Grid.Row="2" Grid.Column="1" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="2" Grid.Column="2" FontSize="20" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
 
                     <TextBlock Grid.Row="3" Grid.Column="0" FontSize="20" Text="60 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
                     <TextBox x:Name="ValueFor60MinTextBox" FontSize="20" Grid.Row="3" Grid.Column="1" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="3" Grid.Column="2" FontSize="20" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
+
 
                     <TextBlock Grid.Row="4" Grid.Column="0" FontSize="20" Text="90 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
                     <TextBox x:Name="ValueFor90MinTextBox" FontSize="20" Grid.Row="4" Grid.Column="1" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="4" Grid.Column="2" FontSize="20" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
+
                 </Grid>
             </Grid>
         </TabItem>

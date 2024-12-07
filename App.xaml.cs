@@ -68,7 +68,6 @@ namespace OrcamentoMaker3000
         /// Occurs when the application is loading.
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            _host.Start();
 
             string basePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Monção Brass", "Orçamentos Automatizados");
             string logsPath = Path.Combine(basePath, "logs");
@@ -102,6 +101,9 @@ namespace OrcamentoMaker3000
                 MessageBox.Show($"Erro ao inicializar diretórios e arquivos: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
                 Shutdown(); // Encerrar a aplicação
             }
+
+            _host.Start();
+
         }
 
         /// Occurs when the application is closing.
