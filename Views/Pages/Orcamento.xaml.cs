@@ -14,16 +14,12 @@ using OpenQA.Selenium.Support.UI;
 using System.Globalization;
 using OpenQA.Selenium.Support;
 using System.Text.RegularExpressions;
-
 using DocumentFormat.OpenXml.InkML;
 using System.Diagnostics;
 using OrcamentoMaker3000.Views.Windows;
 
 namespace OrcamentoMaker3000.Views.Pages
 {
-    /// <summary>
-    /// Interaction logic for Orcamento.xaml
-    /// </summary>
     public partial class Orcamento : System.Windows.Controls.Page
     {
         public Orcamento()
@@ -32,126 +28,23 @@ namespace OrcamentoMaker3000.Views.Pages
 
             LoadConfig();
         }
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            // Lista para guardar as durações selecionadas
+            var selectedDurations = new List<string>();
 
-        //private void calcularDistancia(string x)
-        //{
-        //    string local = x; // Local que você deseja usar para calcular a distância
+            // Verifica cada CheckBox e adiciona as durações selecionadas
+            if (Duration15CheckBox.IsChecked == true) selectedDurations.Add("15");
+            if (Duration30CheckBox.IsChecked == true) selectedDurations.Add("30");
+            if (Duration45CheckBox.IsChecked == true) selectedDurations.Add("45");
+            if (Duration60CheckBox.IsChecked == true) selectedDurations.Add("60");
+            if (Duration90CheckBox.IsChecked == true) selectedDurations.Add("90");
 
-        //    IWebDriver driver = new ChromeDriver();
-
-        //    try
-        //    {
-        //        // Navegar até a página ViaMichelin
-        //        driver.Navigate().GoToUrl("https://www.viamichelin.pt/itinerarios");
-
-        //        // Esperar a página carregar
-        //        Thread.Sleep(2500);
-
-        //        // Localizar o botão "Continuar sem aceitar" e clicar
-        //        try
-        //        {
-        //            var continueWithoutAgreeButton = driver.FindElement(By.XPath("//span[contains(@class, 'didomi-continue-without-agreeing')]"));
-        //            continueWithoutAgreeButton.Click();
-        //        }
-        //        catch (NoSuchElementException)
-        //        {
-        //            MessageBox.Show("Botão 'Continuar sem aceitar' não encontrado. Prosseguindo com o processo.");
-        //        }
-
-        //        // Esperar a página carregar após clicar em "Continuar sem aceitar"
-        //        Thread.Sleep(4000);
-
-        //        // Localizar a caixa de entrada "Partida" e inserir "Monção"
-        //        var fromInput = driver.FindElement(By.XPath("//input[@id='departure']"));
-        //        fromInput.SendKeys("Monção");
-
-        //        // Esperar os resultados aparecerem
-        //        Thread.Sleep(4000);
-        //        // Selecionar a primeira opção da lista de resultados da "Partida"
-        //        var fromFirstResult = driver.FindElement(By.XPath("//ul[@role='listbox']//li[1]"));
-        //        fromFirstResult.Click();
-
-        //        // Localizar a caixa de entrada "Chegada" e inserir o local
-        //        var toInput = driver.FindElement(By.XPath("//input[@id='arrival']"));
-        //        toInput.SendKeys(local);
-
-        //        // Esperar os resultados aparecerem
-        //        Thread.Sleep(4000);
-
-        //        // Selecionar a primeira opção da lista de resultados da "Chegada" (com data-testid apropriado)
-        //        var toFirstResult = driver.FindElement(By.XPath("//ul[@role='listbox']//li[@data-testid='result-item-arrival-1']"));
-        //        toFirstResult.Click();
-
-        //        // Localizar e clicar no botão "Procurar um itinerário"
-        //        var searchButton = driver.FindElement(By.XPath("//button[contains(@class, 'btn-filled-primary')]//span[text()='Procurar um itinerário']"));
-        //        searchButton.Click();
-
-        //        // Esperar o carregamento e mudar para a nova aba
-        //        Thread.Sleep(4000); // Ajuste conforme necessário para garantir que a nova aba seja carregada
-        //        driver.SwitchTo().Window(driver.WindowHandles.Last()); // Mudar para a nova aba
-
-        //        // Esperar os resultados carregarem
-        //        Thread.Sleep(4000);
-
-        //        // Localizar e clicar no botão "Continuar"
-        //        var continueButton = driver.FindElement(By.XPath("//button[contains(@class, 'btn-filled-dark')]//span[text()='Continuar']"));
-        //        continueButton.Click();
-
-        //        // Esperar os resultados carregarem novamente
-        //        Thread.Sleep(4000);
-
-        //        // Capturar a distância em KM e o custo em €
-        //        try
-        //        {
-        //            // Capturar o elemento pai que contém todas as informações (distância, custo, tempo)
-        //            var infoElement = driver.FindElement(By.XPath("//div[contains(@class, 'flex gap-2 w-full')]"));
-        //            string infoText = infoElement.Text.Trim();
-
-        //            System.Diagnostics.Trace.WriteLine($"Informações extraídas: {infoText}");
-
-        //            // Extrair a distância em km (assumindo que é o segundo valor seguido de "km")
-        //            var distanceMatch = Regex.Match(infoText, @"\d+(\.\d+)?\s*km");
-        //            if (distanceMatch.Success)
-        //            {
-        //                string distanceText = distanceMatch.Value.Replace(" km", "").Trim();
-        //                OrcamentoModel.Instance.Distance = double.Parse(distanceText, CultureInfo.InvariantCulture);
-        //                System.Diagnostics.Trace.WriteLine($"Distância: {OrcamentoModel.Instance.Distance} km");
-        //            }
-        //            else
-        //            {
-        //                MessageBox.Show("Não foi possível encontrar a distância.");
-        //            }
-
-        //            // Extrair o custo em € (assumindo que é o terceiro valor precedido de €)
-        //            var costMatch = Regex.Match(infoText, @"€\s*\d+(\.\d+)?");
-        //            if (costMatch.Success)
-        //            {
-        //                string costText = costMatch.Value.Replace("€", "").Trim();
-        //                OrcamentoModel.Instance.TravelExpenses = double.Parse(costText, CultureInfo.InvariantCulture);
-        //                System.Diagnostics.Trace.WriteLine($"Custo por carro ida: {OrcamentoModel.Instance.TravelExpenses} €");
-        //            }
-        //            else
-        //            {
-        //                MessageBox.Show("Não foi possível encontrar o custo.");
-        //            }
-        //        }
-        //        catch (NoSuchElementException ex)
-        //        {
-        //            MessageBox.Show($"Erro ao capturar informações: {ex.Message}");
-        //        }
-
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Erro: {ex.Message}");
-        //    }
-        //    finally
-        //    {
-        //        // Fechar o navegador
-        //        driver.Quit();
-        //    }
-        //}
+            // Atualiza o texto do ComboBox principal com as durações selecionadas
+            DurationComboBox.Text = selectedDurations.Count > 0
+                ? string.Join(", ", selectedDurations) + " minutos"
+                : "";
+        }
 
         private void LoadConfig()
         {
@@ -303,15 +196,6 @@ namespace OrcamentoMaker3000.Views.Pages
 
         private double CalcularExtraSalary(double distance, string outputPath)
         {
-            //if (distance < 30)
-            //    return 10;
-            //else if (distance < 100)
-            //    return 15;
-            //else if (distance < 150)
-            //    return 20;
-            //else
-            //    return 30;
-
             // Encontrar a faixa de distância correta no dicionário
             foreach (var range in OrcamentoModel.Instance.ExtraSalary.Keys.OrderBy(k => k))
             {
@@ -492,9 +376,6 @@ namespace OrcamentoMaker3000.Views.Pages
 
             return cotation;
         }
-
-
-
         private void ConverterParaPdf(string docPath)
         {
             try
@@ -532,7 +413,6 @@ namespace OrcamentoMaker3000.Views.Pages
                 writer.WriteLine($"{message}");
             }
         }
-
         private void VerificarECriarDiretorioLogs()
         {
             string logPath = Path.Combine(OrcamentoModel.Instance.SavePath, "logs");
@@ -542,14 +422,12 @@ namespace OrcamentoMaker3000.Views.Pages
                 Directory.CreateDirectory(logPath);
             }
         }
-
         private void CalcViagem(object sender, RoutedEventArgs e)
         {
             // iniciar uma janela WebViewWindow
-
+            OrcamentoModel.Instance.Location = LocalTextBox.Text;
             WebViewWindow webViewWindow = new WebViewWindow();
             webViewWindow.Show();
-
         }
     }
 

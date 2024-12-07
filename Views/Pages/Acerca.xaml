@@ -6,51 +6,69 @@
       xmlns:local="clr-namespace:OrcamentoMaker3000.Views.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Background="#F8F9FC"
+      Foreground="Black"
       Title="Acerca">
 
-    <Grid Margin="20">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
+    <!-- Viewbox para escalonamento automático -->
+        <Grid Margin="20">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                <!-- Imagem Principal -->
+                <Image 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top"
+                    Width="Auto" Height="Auto" 
+                    Source="pack://application:,,,/Assets/mb.jpg" 
+                    Stretch="Uniform" Margin="0,10,0,0" 
+                    RenderOptions.BitmapScalingMode="HighQuality"/>
 
-        <!-- Imagem -->
-        <Image 
-               HorizontalAlignment="Center" 
-               VerticalAlignment="Top"
-               Width="386" Height="252" 
-               Source="pack://application:,,,/Assets/mb.jpg" 
-               Stretch="Uniform" Margin="0,108,0,0" 
-               RenderOptions.BitmapScalingMode="HighQuality"
-        />
+                <!-- Texto -->
+                <TextBlock 
+                    Text="© 2024 André Pereira &amp; Monção Brass. Todos os direitos reservados." 
+                    FontSize="20" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,10,0,10" 
+                    Foreground="Black" 
+                    FontWeight="Bold"
+                    TextWrapping="Wrap" />
 
+                <!-- Ícones de Redes Sociais -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <!-- Facebook -->
+                    <Button Width="60" Height="60" Margin="5" Background="Transparent" Click="AbrirFacebook">
+                        <Image Source="pack://application:,,,/Assets/facebook_icon.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" />
+                    </Button>
 
+                    <!-- Instagram -->
+                    <Button Width="60" Height="60" Margin="5" Background="Transparent" Click="AbrirInstagram">
+                        <Image Source="pack://application:,,,/Assets/instagram_icon.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Button>
 
+                    <!-- Twitter -->
+                    <Button Width="60" Height="60" Margin="5" Background="Transparent" Click="AbrirTwitter">
+                        <Image Source="pack://application:,,,/Assets/twitter_icon.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Button>
 
-        <!-- Texto -->
-        <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20">
-  
-            <TextBlock TextWrapping="Wrap"
-                       FontSize="16"
-                       Margin="0,0,0,10">
-                Esta aplicação foi desenvolvida por André Pereira para agilizar e automatizar o processo de geração de orçamentos para a Monção Brass, uma brass band portuguesa. Com esta aplicação, pretendemos poupar tempo e garantir mais eficiência na criação de orçamentos para os nossos clientes e eventos.
-            </TextBlock>
+                    <!-- Gmail -->
+                    <Button Width="60" Height="60" Margin="5" Background="Transparent" Click="AbrirGmail">
+                        <Image Source="pack://application:,,,/Assets/gmail_icon.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Button>
 
-            <TextBlock TextWrapping="Wrap" 
-                       FontSize="16">
-                Se tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato através do seguinte e-mail:
-            </TextBlock>
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                <TextBlock Text="&#x2709;" 
-                           FontWeight="Bold" 
-                           FontSize="16"
-                           Foreground="Black"
-                           Margin="0,0,5,0"/>
-                <TextBlock Text="andre3699@gmail.com" 
-                           FontWeight="Bold" 
-                           FontSize="16"
-                           Foreground="Black"/>
+                    <!-- Tik-Tok -->
+                    <Button Width="60" Height="60" Margin="5" Background="Transparent" Click="AbrirTikTok">
+                        <Image Source="pack://application:,,,/Assets/tik-tok_icon.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Button>
+
+                    <!-- Youtube -->
+                    <Button Width="60" Height="60" Margin="5" Background="Transparent" Click="AbrirYoutube">
+                        <Image Source="pack://application:,,,/Assets/youtube_icon.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Button>
+
+                    <!-- Spotify -->
+                    <Button Width="60" Height="60" Margin="5" Background="Transparent" Click="AbrirSpotify">
+                        <Image Source="pack://application:,,,/Assets/spotify_icon.png" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Button>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
-    </Grid>
+        </Grid>
 </Page>

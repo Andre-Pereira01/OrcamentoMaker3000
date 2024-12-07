@@ -16,13 +16,15 @@ namespace OrcamentoMaker3000.ViewModels.Windows
             {
                 Content = "Orçamento",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Document24},
-                TargetPageType = typeof(Views.Pages.Orcamento)
+                TargetPageType = typeof(Views.Pages.Orcamento),
+                LayoutTransform = new System.Windows.Media.ScaleTransform(1.5, 1.5) 
             },
              new NavigationViewItem()
             {
                 Content = "Definições",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
-                TargetPageType = typeof(Views.Pages.Definicoes)
+                TargetPageType = typeof(Views.Pages.Definicoes),
+                LayoutTransform = new System.Windows.Media.ScaleTransform(1.5, 1.5)
             }
 
         };
@@ -34,7 +36,8 @@ namespace OrcamentoMaker3000.ViewModels.Windows
             {
                 Content = "Acerca",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Info24 },
-                TargetPageType = typeof(Views.Pages.Acerca)
+                TargetPageType = typeof(Views.Pages.Acerca),
+                LayoutTransform = new System.Windows.Media.ScaleTransform(1.5, 1.5)
             }
         };
 

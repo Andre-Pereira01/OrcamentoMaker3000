@@ -13,9 +13,7 @@ using Wpf.Ui;
 
 namespace OrcamentoMaker3000
 {
-    /// <summary>
     /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App
     {
         // The.NET Generic Host provides dependency injection, configuration, logging, and other services.
@@ -58,9 +56,7 @@ namespace OrcamentoMaker3000
 
             }).Build();
 
-        /// <summary>
         /// Gets registered service.
-        /// </summary>
         /// <typeparam name="T">Type of the service to get.</typeparam>
         /// <returns>Instance of the service or <see langword="null"/>.</returns>
         public static T GetService<T>()
@@ -69,17 +65,46 @@ namespace OrcamentoMaker3000
             return _host.Services.GetService(typeof(T)) as T;
         }
 
-        /// <summary>
         /// Occurs when the application is loading.
-        /// </summary>
         private void OnStartup(object sender, StartupEventArgs e)
         {
             _host.Start();
+
+            string basePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Monção Brass", "Orçamentos Automatizados");
+            string logsPath = Path.Combine(basePath, "logs");
+            string configFilePath = Path.Combine(basePath, "config.json");
+            string templateFilePath = Path.Combine(basePath, "modelo.docx");
+
+            try
+            {
+                // Criar diretório base e logs
+                if (!Directory.Exists(basePath))
+                    Directory.CreateDirectory(basePath);
+                if (!Directory.Exists(logsPath))
+                    Directory.CreateDirectory(logsPath);
+
+                // Criar ou copiar arquivos
+                if (!File.Exists(configFilePath))
+                {
+                    string sourceConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "config.json");
+                    File.Copy(sourceConfig, configFilePath);
+                }
+
+                if (!File.Exists(templateFilePath))
+                {
+                    // Copie o modelo da pasta de instalação para o destino
+                    string sourceTemplate = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "modelo.docx");
+                    File.Copy(sourceTemplate, templateFilePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erro ao inicializar diretórios e arquivos: {ex.Message}", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                Shutdown(); // Encerrar a aplicação
+            }
         }
 
-        /// <summary>
         /// Occurs when the application is closing.
-        /// </summary>
         private async void OnExit(object sender, ExitEventArgs e)
         {
             await _host.StopAsync();
@@ -87,9 +112,7 @@ namespace OrcamentoMaker3000
             _host.Dispose();
         }
 
-        /// <summary>
         /// Occurs when an exception is thrown by an application but not handled.
-        /// </summary>
         private void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             // For more info see https://docs.microsoft.com/en-us/dotnet/api/system.windows.application.dispatcherunhandledexception?view=windowsdesktop-6.0

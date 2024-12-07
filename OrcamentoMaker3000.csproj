@@ -11,6 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="Resources\config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\modelo.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="wpfui-icon.ico" />
   </ItemGroup>
 
@@ -18,8 +24,6 @@
     <PackageReference Include="DocumentFormat.OpenXml" Version="3.1.0" />
     <PackageReference Include="DocX" Version="3.0.1" />
     <PackageReference Include="FreeSpire.Doc" Version="12.2.0" />
-    <PackageReference Include="GMap.Net" Version="1.0.1" />
-    <PackageReference Include="GMap.NET.Presentation" Version="1.7.5" />
     <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1004" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2849.39" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -34,17 +38,33 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\facebook_icon.png" />
+    <None Remove="Assets\gmail_icon.png" />
+    <None Remove="Assets\instagram_icon.png" />
     <None Remove="Assets\mb.jpg" />
     <None Remove="Assets\ndre.jpeg" />
+    <None Remove="Assets\spotify_icon.png" />
+    <None Remove="Assets\tik-tok_icon.png" />
+    <None Remove="Assets\twitter_icon.png" />
     <None Remove="Assets\wpfui-icon-256.png" />
     <None Remove="Assets\wpfui-icon-1024.png" />
+    <None Remove="Assets\youtube_icon.png" />
+    <None Remove="Resources\config.json" />
+    <None Remove="Resources\modelo.docx" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\facebook_icon.png" />
+    <Resource Include="Assets\gmail_icon.png" />
+    <Resource Include="Assets\instagram_icon.png" />
     <Resource Include="Assets\mb.jpg" />
     <Resource Include="Assets\ndre.jpeg" />
+    <Resource Include="Assets\spotify_icon.png" />
+    <Resource Include="Assets\tik-tok_icon.png" />
+    <Resource Include="Assets\twitter_icon.png" />
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />
+    <Resource Include="Assets\youtube_icon.png" />
   </ItemGroup>
 
   <ItemGroup>

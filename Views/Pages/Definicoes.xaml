@@ -11,7 +11,7 @@
       Title="Definicoes">
 
     <TabControl>
-        <TabItem Header="Definições Base">
+        <TabItem Header="Definições Base" FontSize="22">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -19,11 +19,11 @@
                     <!--Auto e * para ser scrollable-->
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Stretch" Margin="15,0,0,10">
-                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Width="40" Margin="0 20 0 0"  HorizontalAlignment="Stretch">
+                <StackPanel Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Stretch" Margin="35,0,0,10">
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Width="50" Margin="0 20 0 0"  HorizontalAlignment="Stretch">
                         <ui:Button Click="Save_Definitions">
                             <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Symbol="Save24"/>
+                                <ui:SymbolIcon Symbol="Save24" FontSize="25"/>
                             </StackPanel>
                         </ui:Button>
                         <Border.Style>
@@ -49,34 +49,35 @@
 
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30*"/>
-                        <ColumnDefinition Width="30*"/>
-                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
 
 
                     </Grid.ColumnDefinitions>
 
-                    <!--<TextBlock Grid.Row="0" Grid.Column="0" Text="Preço do Quilometro (cents)"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,10,0"/>--><!--
+                    <!--<TextBlock Grid.Row="0" Grid.Column="0" Text="Preço do Quilometro (cents)"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,10,0"/>-->
+                    <!--
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Preço km(€)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
                     <TextBox x:Name="PrecokmText" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Width="Auto"  Margin="0,5,5,0" VerticalAlignment="Center">
                     </TextBox>-->
 
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Poupança Grupo(%)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,10,10,0"/>
-                    <TextBox x:Name="GrupoText" Grid.Row="0" Grid.Column="1" Width="Auto"   HorizontalAlignment="Stretch" Margin="0,10,10,0" VerticalAlignment="Center"/>
+                    <TextBlock FontSize="20" Grid.Row="0" Grid.Column="0" Text="Poupança Grupo(%)" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,10,10,0"/>
+                    <TextBox FontSize="20" x:Name="GrupoText" Grid.Row="0" Grid.Column="1" Width="Auto"  MinWidth="50" HorizontalAlignment="Stretch" Margin="0,10,10,0" VerticalAlignment="Center"/>
 
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Manager(%)" VerticalAlignment="Center"  HorizontalAlignment="Right" Margin="0,10,10,0"/>
-                    <TextBox Name="ManagerBox" Grid.Row="1" Grid.Column="1" Width="Auto"   HorizontalAlignment="Stretch" Margin="0,10,10,0" VerticalAlignment="Center">
+                    <TextBlock FontSize="20" Grid.Row="1" Grid.Column="0" Text="Manager(%)" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="0,10,10,0"/>
+                    <TextBox FontSize="20" Name="ManagerBox" Grid.Row="1" Grid.Column="1" Width="Auto"   HorizontalAlignment="Stretch" Margin="0,10,10,0" VerticalAlignment="Center">
                     </TextBox>
 
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Alimentação(€)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
-                    <TextBox x:Name="AlimentaçãoBox" Grid.Row="2" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                    <TextBlock FontSize="20" Grid.Row="2" Grid.Column="0" Text="Alimentação(€)" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,10,10,0"/>
+                    <TextBox FontSize="20" x:Name="AlimentaçãoBox" Grid.Row="2" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Despesas Extra(€)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
-                    <TextBox x:Name="ExtraBox" Grid.Row="3" Grid.Column="1" Text="0"  Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                    <TextBlock FontSize="20" Grid.Row="3" Grid.Column="0" Text="Despesas Extra(€)" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,10,10,0"/>
+                    <TextBox FontSize="20" x:Name="ExtraBox" Grid.Row="3" Grid.Column="1" Text="0"  Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
                 </Grid>
             </Grid>
         </TabItem>
-        <TabItem Header="Salário Extra">
+        <TabItem Header="Salário Extra" FontSize="22">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -84,11 +85,11 @@
                     <!--Auto e * para ser scrollable-->
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Stretch" Margin="15,0,0,10">
-                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Width="40" Margin="0 20 0 0"  HorizontalAlignment="Stretch">
+                <StackPanel Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Stretch" Margin="35,0,0,10">
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Width="50" Margin="0 20 0 0"  HorizontalAlignment="Stretch">
                         <ui:Button Click="Save_Extra">
                             <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Symbol="Save24"/>
+                                <ui:SymbolIcon Symbol="Save24" FontSize="25"/>
                             </StackPanel>
                         </ui:Button>
                         <Border.Style>
@@ -112,45 +113,43 @@
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="15*"/>
-                        <ColumnDefinition Width="15*"/>
-                        <ColumnDefinition Width="15*"/>
-                        <ColumnDefinition Width="15*"/>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="35*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
                     <!-- Intervalos de Distância -->
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Menor que" VerticalAlignment="Center" Margin="0,10,10,0"/>
-                    <TextBox x:Name="DistanceLimit1TextBox" Grid.Row="0" Grid.Column="1" Width="Auto" Margin="0,10,10,0" />
-                    <TextBlock Grid.Row="0" Grid.Column="2" Text="km, recebe" VerticalAlignment="Center" Margin="0,10,10,0"/>
-                    <TextBox x:Name="Salary1TextBox" Grid.Row="0" Grid.Column="3" Width="Auto" Margin="0,10,10,0" />
-                    <TextBlock Grid.Row="0" Grid.Column="4" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" Text="Menor que" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="DistanceLimit1TextBox" FontSize="20" Grid.Row="0" Grid.Column="1" Width="Auto" MinWidth="50" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="0" Grid.Column="2" FontSize="20" Text="km, recebe" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="Salary1TextBox" Grid.Row="0" FontSize="20" Grid.Column="3" Width="Auto" MinWidth="50" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="0" Grid.Column="4" FontSize="20" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
 
 
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Menor que" VerticalAlignment="Center" Margin="0,10,10,0"/>
-                    <TextBox x:Name="DistanceLimit2TextBox" Grid.Row="1" Grid.Column="1" Width="Auto" Margin="0,10,10,0"/>
-                    <TextBlock Grid.Row="1" Grid.Column="2" Text="km, recebe" VerticalAlignment="Center" Margin="0,10,10,0"/>
-                    <TextBox x:Name="Salary2TextBox" Grid.Row="1" Grid.Column="3" Width="Auto" Margin="0,10,10,0"/>
-                    <TextBlock Grid.Row="1" Grid.Column="4" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20" Text="Menor que" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="DistanceLimit2TextBox" FontSize="20" Grid.Row="1" Grid.Column="1" Width="Auto" Margin="0,10,10,0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="2" FontSize="20" Text="km, recebe" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="Salary2TextBox" Grid.Row="1" FontSize="20" Grid.Column="3" Width="Auto" Margin="0,10,10,0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="4" FontSize="20" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
 
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Menor que" VerticalAlignment="Center" Margin="0,10,10,0"/>
-                    <TextBox x:Name="DistanceLimit3TextBox" Grid.Row="2" Grid.Column="1" Width="Auto" Margin="0,10,10,0" />
-                    <TextBlock Grid.Row="2" Grid.Column="2" Text="km, recebe" VerticalAlignment="Center" Margin="0,10,10,0"/>
-                    <TextBox x:Name="Salary3TextBox" Grid.Row="2" Grid.Column="3" Width="Auto" Margin="0,10,10,0" />
-                    <TextBlock Grid.Row="2" Grid.Column="4" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" FontSize="20" Text="Menor que" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="DistanceLimit3TextBox" FontSize="20" Grid.Row="2" Grid.Column="1" Width="Auto" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="2" Grid.Column="2" FontSize="20" Text="km, recebe" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="Salary3TextBox" Grid.Row="2" FontSize="20" Grid.Column="3" Width="Auto" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="2" Grid.Column="4" FontSize="20" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
 
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Maior que" VerticalAlignment="Center" Margin="0,10,10,0"/>
-                    <TextBox x:Name="DistanceLimit4TextBox" Grid.Row="3" Grid.Column="1" Width="Auto" Margin="0,10,10,0"/>
-                    <TextBlock Grid.Row="3" Grid.Column="2" Text="km, recebe" VerticalAlignment="Center" Margin="0,10,10,0"/>
-                    <TextBox x:Name="Salary4TextBox" Grid.Row="3" Grid.Column="3" Width="Auto" Margin="0,10,10,0"/>
-                    <TextBlock Grid.Row="3" Grid.Column="4" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" FontSize="20" Text="Maior que" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="DistanceLimit4TextBox" FontSize="20" Grid.Row="3" Grid.Column="1" Width="Auto" Margin="0,10,10,0"/>
+                    <TextBlock Grid.Row="3" Grid.Column="2" FontSize="20" Text="km, recebe" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="Salary4TextBox" Grid.Row="3" FontSize="20" Grid.Column="3" Width="Auto" Margin="0,10,10,0"/>
+                    <TextBlock Grid.Row="3" Grid.Column="4" FontSize="20" Text="€" VerticalAlignment="Center" Margin="0,10,10,0"/>
                 </Grid>
 
             </Grid>
         </TabItem>
-
-        <TabItem Header="Valores por Duração">
+        <TabItem Header="Valores por Duração" FontSize="22">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -158,11 +157,11 @@
                     <!--Auto e * para ser scrollable-->
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Orientation="Horizontal"  HorizontalAlignment="Stretch" Margin="15,0,0,10">
-                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Width="40" Margin="0 20 0 0"  HorizontalAlignment="Stretch">
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="35,0,0,10" Grid.ColumnSpan="2">
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Width="50" Margin="0 20 0 0"  HorizontalAlignment="Stretch">
                         <ui:Button Click="Save_ValoresBase">
                             <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Symbol="Save24"/>
+                                <ui:SymbolIcon Symbol="Save24" FontSize="25"/>
                             </StackPanel>
                         </ui:Button>
                         <Border.Style>
@@ -177,7 +176,7 @@
                     </Border>
                 </StackPanel>
 
-                <Grid Grid.Row="1" Margin="35,10,0,0" x:Name="SettingsPropertiesGrid3">
+                <Grid Grid.Row="1" Margin="35,10,0,0" x:Name="SettingsPropertiesGrid3" Grid.ColumnSpan="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -188,25 +187,25 @@
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20*"/>
-                        <ColumnDefinition Width="30*"/>
-                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="15 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
-                    <TextBox x:Name="ValueFor15MinTextBox" Grid.Row="0" Grid.Column="1" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="0" Grid.Column="0" FontSize="20" Text="15 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="ValueFor15MinTextBox" FontSize="20" Grid.Row="0" Grid.Column="1" Margin="0,10,10,0" MinWidth="65"/>
 
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="30 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
-                    <TextBox x:Name="ValueFor30MinTextBox" Grid.Row="1" Grid.Column="1" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" FontSize="20" Text="30 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="ValueFor30MinTextBox" FontSize="20" Grid.Row="1" Grid.Column="1" Margin="0,10,10,0" />
 
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="45 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
-                    <TextBox x:Name="ValueFor45MinTextBox" Grid.Row="2" Grid.Column="1" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" FontSize="20" Text="45 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="ValueFor45MinTextBox" FontSize="20"  Grid.Row="2" Grid.Column="1" Margin="0,10,10,0" />
 
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="60 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
-                    <TextBox x:Name="ValueFor60MinTextBox" Grid.Row="3" Grid.Column="1" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" FontSize="20" Text="60 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="ValueFor60MinTextBox" FontSize="20" Grid.Row="3" Grid.Column="1" Margin="0,10,10,0" />
 
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="90 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
-                    <TextBox x:Name="ValueFor90MinTextBox" Grid.Row="4" Grid.Column="1" Margin="0,10,10,0" />
+                    <TextBlock Grid.Row="4" Grid.Column="0" FontSize="20" Text="90 min:" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                    <TextBox x:Name="ValueFor90MinTextBox" FontSize="20" Grid.Row="4" Grid.Column="1" Margin="0,10,10,0" />
                 </Grid>
             </Grid>
         </TabItem>

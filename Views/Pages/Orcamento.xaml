@@ -18,121 +18,119 @@
 
         <Grid Grid.Row="1" Margin="15,10,0,0" x:Name="SettingsPropertiesGrid">
             <Grid.RowDefinitions>
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="9*"/>
-                <RowDefinition Height="9*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*"/>
-                <ColumnDefinition Width="40*"/>
-                <ColumnDefinition Width="30*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
 
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Nome do Cliente"  HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10,10,0"/>
-            <TextBox x:Name="ClientNameTextBox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Width="Auto"  Margin="0,5,5,0" VerticalAlignment="Center">
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Nome do Cliente"  HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" Margin="0,10,10,0"/>
+            <TextBox x:Name="ClientNameTextBox" Grid.Row="0" Grid.Column="1" MinWidth="250"  HorizontalAlignment="Stretch" Width="Auto"  Margin="0,5,5,0" FontSize="20" VerticalAlignment="Center">
             </TextBox>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="Telefone" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
-            <TextBox x:Name="ClientPhoneTextBox" Grid.Row="1" Grid.Column="1" Width="Auto"   HorizontalAlignment="Stretch" Margin="0,10,10,0" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Telefone" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="20" Margin="0,10,10,0"/>
+            <TextBox x:Name="ClientPhoneTextBox" Grid.Row="1" Grid.Column="1" Width="Auto"   HorizontalAlignment="Stretch" FontSize="20" Margin="0,10,10,0" VerticalAlignment="Center"/>
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="Email" VerticalAlignment="Center"  HorizontalAlignment="Right" Margin="0,10,10,0"/>
-            <TextBox Name="ClientEmailTextBox" Grid.Row="2" Grid.Column="1" Width="Auto"   HorizontalAlignment="Stretch" Margin="0,10,10,0" VerticalAlignment="Center">
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Email" VerticalAlignment="Center"  HorizontalAlignment="Right"  FontSize="20" Margin="0,10,10,0"/>
+            <TextBox Name="ClientEmailTextBox" Grid.Row="2" Grid.Column="1" Width="Auto"   HorizontalAlignment="Stretch" FontSize="20"  Margin="0,10,10,0" VerticalAlignment="Center">
             </TextBox>
 
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="Serviço" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
-            <TextBox x:Name="ServicoText" Grid.Row="3" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Serviço" VerticalAlignment="Center" HorizontalAlignment="Right"  FontSize="20" Margin="0,10,10,0"/>
+            <TextBox x:Name="ServicoText" Grid.Row="3" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch"  FontSize="20" VerticalAlignment="Center"/>
 
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="Data" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
-            <DatePicker x:Name="DatePicker" Grid.Row="4" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Data" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="20"  Margin="0,10,10,0"/>
+            <DatePicker x:Name="DatePicker" Grid.Row="4" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" FontSize="20"  VerticalAlignment="Center"/>
 
-            <TextBlock Grid.Row="5" Grid.Column="0" Text="Horário" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
-            <TextBox x:Name="HorarioBox" Grid.Row="5" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Horário" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="20"  Margin="0,10,10,0"/>
+            <TextBox x:Name="HorarioBox" Grid.Row="5" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch"  FontSize="20"  VerticalAlignment="Center"/>
 
-            <TextBlock Text="Selecione as Durações:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0" />
-            <ComboBox x:Name="DurationComboBox" Grid.Row="6" Grid.Column="1" Width="Auto" Margin="0,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                <CheckBox x:Name="Duration15CheckBox" Content="15 Minutos" />
-                <CheckBox x:Name="Duration30CheckBox" Content="30 Minutos" />
-                <CheckBox x:Name="Duration45CheckBox" Content="45 Minutos" />
-                <CheckBox x:Name="Duration60CheckBox" Content="60 Minutos" />
-                <CheckBox x:Name="Duration90CheckBox" Content="90 Minutos" />
+            <TextBlock Text="Selecione as Durações:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="20"  Margin="0,10,10,0" />
+            <ComboBox x:Name="DurationComboBox" Grid.Row="6" Grid.Column="1" Width="Auto" 
+          Margin="0,10,10,10" HorizontalAlignment="Stretch" FontSize="20" 
+          VerticalAlignment="Center"  IsEditable="True" IsReadOnly="True">
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel />
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+                <CheckBox x:Name="Duration15CheckBox" Content="15 Minutos" FontSize="20" 
+              Focusable="False" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                <CheckBox x:Name="Duration30CheckBox" Content="30 Minutos" FontSize="20" 
+              Focusable="False" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                <CheckBox x:Name="Duration45CheckBox" Content="45 Minutos" FontSize="20" 
+              Focusable="False" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                <CheckBox x:Name="Duration60CheckBox" Content="60 Minutos" FontSize="20" 
+              Focusable="False" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+                <CheckBox x:Name="Duration90CheckBox" Content="90 Minutos" FontSize="20" 
+              Focusable="False" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
             </ComboBox>
 
-            <TextBlock Grid.Row="7" Grid.Column="0" Text="Local" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
-            <TextBox x:Name="LocalTextBox" Grid.Row="7" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="Local"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
+            <TextBox x:Name="LocalTextBox" Grid.Row="7" Grid.Column="1" FontSize="20"  Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
             <!--<TextBlock Grid.Row="8" Grid.Column="0" Text="Distância (km)" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,10,0"/>
             <TextBox x:Name="DistanciaText" Grid.Row="8" Grid.Column="1" Width="Auto" Margin="0,10,10,0"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>-->
 
-            <StackPanel Grid.Row="8" Grid.Column="0"  Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,10,10,10">
+            <Border Grid.Row="8" Grid.Column="0" BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="10 20 10 10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Click="Escolher_Diretorio" VerticalAlignment="Center" HorizontalAlignment="Stretch" Padding="10,5" BorderThickness="0" Background="Transparent" MinWidth="150"  MinHeight="40">
+                    <TextBlock Text="Escolher Pasta" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button>
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FBB03B"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
 
-                <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="5,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button Click="Escolher_Diretorio" Content="Escolher Pasta" 
-                VerticalAlignment="Center" 
-                HorizontalAlignment="Stretch" 
-                Padding="10,5" 
-                BorderThickness="0"
-                Background="Transparent"/>
-                    <Border.Style>
-                        <Style TargetType="{x:Type Border}">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FBB03B"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                </Border>
+            <Border Grid.Row="8" Grid.Column="1" BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="10 20 10 10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Click="CalcViagem" VerticalAlignment="Center" HorizontalAlignment="Stretch" Padding="10,5" BorderThickness="0" Background="Transparent" MinWidth="150"  MinHeight="40">
+                    <TextBlock Text="Despesas Viagem" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button>
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FBB03B"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
+            <ToggleButton Grid.Row="9" Grid.Column="0" x:Name="TogglePdfBtn" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Margin="10" MinWidth="150"  MinHeight="40">
+                <TextBlock Text="Gerar PDF" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </ToggleButton>
 
-                <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="5,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button Click="CalcViagem"  Content="Despesas Viagem" 
-                       VerticalAlignment="Center" 
-                       HorizontalAlignment="Stretch" 
-                       Padding="10,5" 
-                       BorderThickness="0"
-                       Background="Transparent"/>
-                    <Border.Style>
-                        <Style TargetType="{x:Type Border}">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FBB03B"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                </Border>
+            <Border Grid.Row="9" Grid.Column="1" BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Click="GerarOrcamento" VerticalAlignment="Center" HorizontalAlignment="Stretch" Padding="10,5" BorderThickness="0" Background="Transparent" MinWidth="150" MinHeight="40">
+                    <TextBlock Text="Gerar Orçamento" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button>
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FBB03B"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
 
-            </StackPanel>
-            <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,10,10,10" >
-
-                <ToggleButton x:Name="TogglePdfBtn" Content="Gerar PDF" IsChecked="False" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10"/>
-
-                <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="5,0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button Click="GerarOrcamento" Content="Gerar Orçamento" 
-                         VerticalAlignment="Center" 
-                         HorizontalAlignment="Stretch" 
-                         Padding="10,5" 
-                         BorderThickness="0"
-                         Background="Transparent"/>
-                    <Border.Style>
-                        <Style TargetType="{x:Type Border}">
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#FBB03B"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                </Border>
-            </StackPanel>
         </Grid>
     </Grid>
 </Page>

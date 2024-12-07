@@ -50,7 +50,7 @@ namespace OrcamentoMaker3000.Services
                 )!;
                 _navigationWindow!.ShowWindow();
 
-                _navigationWindow.Navigate(typeof(Views.Pages.Definicoes));
+                _navigationWindow.Navigate(typeof(Views.Pages.Orcamento));
             }
 
             await Task.CompletedTask;
