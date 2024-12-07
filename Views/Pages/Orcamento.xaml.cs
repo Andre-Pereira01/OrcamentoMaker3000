@@ -1,22 +1,11 @@
-﻿using OrcamentoMaker3000.Models;
-using System.Windows.Controls;
-using System.IO;
-using Ookii.Dialogs.Wpf;
-using DocumentFormat.OpenXml.Packaging;
+﻿using DocumentFormat.OpenXml.Packaging;
 using Newtonsoft.Json;
-using System;
-using System.Windows;
-using Spire.Doc;
-using Spire.Doc.Documents;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
-using System.Globalization;
-using OpenQA.Selenium.Support;
-using System.Text.RegularExpressions;
-using DocumentFormat.OpenXml.InkML;
-using System.Diagnostics;
+using Ookii.Dialogs.Wpf;
+using OrcamentoMaker3000.Models;
 using OrcamentoMaker3000.Views.Windows;
+using Spire.Doc;
+using System.IO;
+using System.Windows.Controls;
 
 namespace OrcamentoMaker3000.Views.Pages
 {
@@ -45,7 +34,6 @@ namespace OrcamentoMaker3000.Views.Pages
                 ? string.Join(", ", selectedDurations) + " minutos"
                 : "";
         }
-
         private void LoadConfig()
         {
 
@@ -72,7 +60,6 @@ namespace OrcamentoMaker3000.Views.Pages
                 MessageBox.Show("Ficheiro de configuração não encontrado.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-        // Função que processa o orçamento e gera o resultado
         private void GerarOrcamento(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(ClientNameTextBox.Text))
@@ -153,9 +140,6 @@ namespace OrcamentoMaker3000.Views.Pages
             AtualizarNumberOrc();
             PreencherDocumentoWord();
         }
-
-
-
         private void AtualizarNumberOrc()
         {
             // Inicializar o número do orçamento com 20
@@ -194,7 +178,6 @@ namespace OrcamentoMaker3000.Views.Pages
             // Incrementar o número do orçamento
             OrcamentoModel.Instance.NumberOrc = numberOrc + 1;;
         }
-
         private double CalcularExtraSalary(double distance, string outputPath)
         {
             // Encontrar a faixa de distância correta no dicionário
@@ -212,7 +195,6 @@ namespace OrcamentoMaker3000.Views.Pages
         }
 
         private string _savePath = OrcamentoModel.Instance.SavePath;
-
         private void Escolher_Diretorio(object sender, RoutedEventArgs e)
         {
             var dialog = new VistaFolderBrowserDialog
@@ -228,7 +210,6 @@ namespace OrcamentoMaker3000.Views.Pages
                 MessageBox.Show($"Pasta selecionada: {_savePath}", "Diretório Escolhido", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-
         private void PreencherDocumentoWord()
         {
             string templatePath = System.IO.Path.Combine(OrcamentoModel.Instance.SavePath, "modelo.docx");
@@ -338,7 +319,6 @@ namespace OrcamentoMaker3000.Views.Pages
                 ConverterParaPdf(outputPath);
             }
         }
-
         private double CalcularCotationParaDuracao(int duration, string outputPath)
         {
             // Obter o valor base por músico para a duração específica
