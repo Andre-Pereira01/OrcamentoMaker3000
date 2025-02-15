@@ -347,12 +347,13 @@ namespace OrcamentoMaker3000.Views.Pages
             Logger($"{DateTime.Now}:Percentagem para o manager: Base({totalBaseValue}) x {OrcamentoModel.Instance.ManagerSalary} = {managerSalary}", outputPath);
 
             // Calcular a cotação final
-            double cotation = totalBaseValue + extraSalary + travelExpenses + groupSavings + managerSalary + OrcamentoModel.Instance.AlimentationExpenses + OrcamentoModel.Instance.ExtraExpenses;
+            double cotation = totalBaseValue + 6*extraSalary + travelExpenses + groupSavings + managerSalary + OrcamentoModel.Instance.AlimentationExpenses + OrcamentoModel.Instance.ExtraExpenses;
 
             Logger($"{DateTime.Now}:Base: {totalBaseValue} + Extra (dist): {extraSalary} + Transporte: {travelExpenses} + Poupança para o Grupo: {groupSavings} + Manager : {managerSalary} + Alimentacao: {OrcamentoModel.Instance.AlimentationExpenses} + Despesas Extra: {OrcamentoModel.Instance.ExtraExpenses} = {cotation}€", outputPath);
             // Arredondar para o valor mais próximo de 50 ou 00
-            cotation = Math.Ceiling(cotation / 50) * 50;
-            Logger($"{DateTime.Now}:Arredonda (valor mais proximo 50 ou 00) para: {cotation}€", outputPath);
+            //cotation = Math.Ceiling(cotation / 50) * 50;
+            cotation = Math.Ceiling(cotation / 50.0) * 50 + 50;
+            Logger($"{DateTime.Now}:Arredonda  para: {cotation}€", outputPath);
             Logger(Environment.NewLine,outputPath);
 
             return cotation;
